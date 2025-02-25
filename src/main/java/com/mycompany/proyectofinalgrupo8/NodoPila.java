@@ -8,16 +8,16 @@ package com.mycompany.proyectofinalgrupo8;
  *
  * @author fernandafajardo
  */
-public class Nodo {
+public class NodoPila {
     
     String operacion;
     int numero;
-    Nodo sig;
+    NodoPila sig;
 
-    public Nodo() {
+    public NodoPila() {
     }
 
-    public Nodo(String operacion, int numero) {
+    public NodoPila(String operacion, int numero) {
         this.operacion = operacion;
         this.numero = numero;
         this.sig = null;
@@ -39,11 +39,11 @@ public class Nodo {
         this.numero = numero;
     }
 
-    public Nodo getSig() {
+    public NodoPila getSig() {
         return sig;
     }
 
-    public void setSig(Nodo sig) {
+    public void setSig(NodoPila sig) {
         this.sig = sig;
     }
     

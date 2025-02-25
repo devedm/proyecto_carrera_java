@@ -10,17 +10,17 @@ package com.mycompany.proyectofinalgrupo8;
  */
 public class PilaGenerica {
     
-    private Nodo top;
+    private NodoPila top;
     
     public PilaGenerica() {
         top = null;
     }
 
-    public Nodo getTop() {
+    public NodoPila getTop() {
         return top;
     }
 
-    public void setTop(Nodo top) {
+    public void setTop(NodoPila top) {
         this.top = top;
     }
     
@@ -31,7 +31,7 @@ public class PilaGenerica {
      */
     public void push(String operacion, int numero){
         
-        Nodo miNodo = new Nodo(operacion, numero);
+        NodoPila miNodo = new NodoPila(operacion, numero);
         if(isEmpty()){
             top = miNodo;
         }else{
@@ -44,12 +44,12 @@ public class PilaGenerica {
      * Elimina y devuelve el nodo del top de la pila.
      * @return El nodo eliminado de la pila. Retorna {@code null} si la pila está vacía.
      */
-    public Nodo pop(){
+    public NodoPila pop(){
         if(isEmpty()){
             System.out.println("Error: la pila esta vacía, no puede desapilar");
             return null;
         }else{
-            Nodo aux = top;
+            NodoPila aux = top;
             top = top.getSig();
             return aux;
         }
