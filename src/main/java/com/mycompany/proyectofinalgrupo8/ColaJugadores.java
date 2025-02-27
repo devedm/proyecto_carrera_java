@@ -63,6 +63,7 @@ public class ColaJugadores {
         
         if(tamano >= maxJugadores){
             System.out.println("No se pueden inscribir más jugadores. Límite alcanzado!");
+            return;
         }
         
         NodoCola nuevoJugador = new NodoCola(nombre);
@@ -120,9 +121,9 @@ public class ColaJugadores {
         
         if(esVacia()){
             System.out.println("No hay jugadores inscritos.");
+            return;
         }
         
-        System.out.println("Jugadores en la cola de Preparados/Listos:");
         NodoCola actual = this.frente;
         while(actual != null){
             System.out.println("- " + actual.getNombre());

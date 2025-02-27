@@ -67,4 +67,20 @@ public class PilaGenerica {
            return false;
         }
     }
+    
+    /***
+     * Imprime en consola el contenido de la pila; si la pila esta vacía, muestra un mensaje indicándolo.
+     */
+    public void print(){
+        if(top == null){
+            System.out.println("La pila esta vacía.");
+            return;
+        }
+        
+        NodoPila actual = top;
+        while(actual != null){
+            System.out.println(actual.getOperacion() + " " + actual.getNumero());
+            actual = actual.getSig();
+        }
+    }
 }
