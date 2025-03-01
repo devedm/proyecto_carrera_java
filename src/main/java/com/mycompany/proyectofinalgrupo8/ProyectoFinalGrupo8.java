@@ -47,7 +47,7 @@ public class ProyectoFinalGrupo8 {
             colaJ.encolar(nombre);
         }
         
-        //Agregar elementos a las pilas de premios y castigos
+        //Agregar elementos a las pilas de premios y castigos - Solo una prueba
         pilaP.push("suma dos posiciones", 2);
         
         pilaC.push("resta tres posiciones", 3);
