@@ -16,31 +16,52 @@ public class ProyectoFinalGrupo8 {
         Scanner scanner = new Scanner(System.in);
         
         //Cola de jugadores
-        ColaJugadores cola = new ColaJugadores();
+        ColaJugadores colaJ = new ColaJugadores();
+        PilaPremios pilaP = new PilaPremios();
+        PilaCastigos pilaC = new PilaCastigos();
         
-        System.out.println("Bienvenidos al juego!");
-        System.out.print("Ingrese la cantidad de jugadores (1-4): ");
-        int cantidad = 0;
+        //Validación cantidad de jugadores
+        int cantidadJ = 0;
         
-       //Validar que la cantidad de jugadores
-       while(cantidad < 1 || cantidad > 4){
-           cantidad = scanner.nextInt();
-           if(cantidad < 1 || cantidad > 4){
-               System.out.print("Por favor ingrese un número entre 1 y 4: ");
-           }
-       }
-       
-       scanner.nextLine(); //Limpiamos el buffer de scanner
-       
-       //Solicitar los nombres de los jugadores
-       for(int i = 1; i <= cantidad; i++){
-           System.out.print("Ingrese el nombre del jugador " + i + ": ");
-           String nombre = scanner.nextLine();
-           cola.encolar(nombre);
-       }
-       
-       // Mostrar los jugadores en la cola
-       cola.mostrarJugadores();
-       
+        do{
+            System.out.println("Ingrese la cantidad de jugadores (máx 4): ");
+            if(scanner.hasNextInt()){
+                cantidadJ = scanner.nextInt();
+                scanner.nextLine();
+                
+                if(cantidadJ > 4 || cantidadJ < 1){
+                    System.out.println("El número de jugadores debe estar ente 1 y 4. Inténtelo de nuevo.");
+                }
+            }else{
+                System.out.println("Entrada inválida. Por favor, ingrese un número.");
+                scanner.next();
+            }
+        
+        }while(cantidadJ > 4 || cantidadJ < 1);
+        
+        //Inscripción de jugadores
+        System.out.println("Ingrese el nombre de los " + cantidadJ + " jugadores:");
+        for(int i = 0; i < cantidadJ; i++){
+            System.out.println("Ingrese el nombre del jugador " + (i+1) + ": ");
+            String nombre = scanner.nextLine();
+            colaJ.encolar(nombre);
+        }
+        
+        //Agregar elementos a las pilas de premios y castigos - Solo una prueba
+        pilaP.push("suma dos posiciones", 2);
+        
+        pilaC.push("resta tres posiciones", 3);
+        
+        //Listar los jugadores en la cola
+        System.out.println("Jugadores en cola:");
+        colaJ.mostrarJugadores();
+        
+        //Listar pilas de premios y castigos
+        System.out.println("Pila de Premios:");
+        pilaP.print();
+        
+        System.out.println("Pila de Castigos:");
+        pilaC.print();
+        
     }
 }
