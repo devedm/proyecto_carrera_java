@@ -57,16 +57,16 @@ public class ColaJugadores {
     
     /***
      * Agrega un jugador a la cola si no ha alcanzado el límite permitido (4).
-     * @param nombre Nombre o alías del jugador
+     * @param jugador Nombre o alías del jugador
      */
-    public void encolar(String nombre){
+    public void encolar(Jugador jugador){
         
         if(tamano >= maxJugadores){
             System.out.println("No se pueden inscribir más jugadores. Límite alcanzado!");
             return;
         }
         
-        NodoCola nuevoJugador = new NodoCola(nombre);
+        NodoCola nuevoJugador = new NodoCola(jugador);
         if(esVacia()){
             this.frente = nuevoJugador;
             this.ultimo = nuevoJugador;
@@ -75,7 +75,7 @@ public class ColaJugadores {
             this.ultimo = nuevoJugador;
         }
         this.tamano++;
-        System.out.println("Jugador " + nombre + " añadido correctamente.");
+        System.out.println("Jugador " + jugador + " añadido correctamente.");
     }
     
     
@@ -84,7 +84,7 @@ public class ColaJugadores {
      * @return Nombre del jugador eliminado
      * @throws Exception Si la cola está vacía, lanza una excepción con el mensaje "Error...".
      */
-    public String desencolar() throws Exception{
+    public Jugador desencolar() throws Exception{
        
         if(esVacia()){
             throw new Exception("Error: No hay jugadores en la cola.");
@@ -97,7 +97,7 @@ public class ColaJugadores {
             this.ultimo = null; // Si la cola queda vacía, el último también deber ser null
         }
         this.tamano--; // Disminuimos el tamaño de la cola
-        return aux.getNombre(); // Retornamos el nombre del jugador eliminado
+        return aux.getJugador(); // Retornamos el nombre del jugador eliminado
     }
     
     
@@ -126,7 +126,24 @@ public class ColaJugadores {
         
         NodoCola actual = this.frente;
         while(actual != null){
-            System.out.println("- " + actual.getNombre());
+            System.out.println("- " + actual.getJugador().getNombre());
+            actual = actual.getSig();
+        }
+    }
+    /**
+    * Muestra la posición de todos los jugadores en la cola.
+    * Si la cola está vacía, se imprime un mensaje indicando que no hay jugadores inscritos.
+    * Recorre la cola desde el frente hasta el final, imprimiendo el nombre y la posición de cada jugador.
+    */
+    public void mostrarPosiciones(){
+        if(esVacia()){
+            System.out.println("No hay jugadores inscritos.");
+            return;
+        }
+        
+        NodoCola actual = this.frente;
+        while(actual != null){
+            System.out.println("- " + actual.getJugador().getNombre() + " Posicion: " + actual.getJugador().getPosicion());
             actual = actual.getSig();
         }
     }

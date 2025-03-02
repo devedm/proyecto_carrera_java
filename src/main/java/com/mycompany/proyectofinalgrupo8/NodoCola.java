@@ -10,23 +10,23 @@ package com.mycompany.proyectofinalgrupo8;
  */
 public class NodoCola {
     
-    private String nombre;
+    private Jugador jugador;
     private NodoCola sig;
 
     public NodoCola() {
     }
 
-    public NodoCola(String nombre) {
-        this.nombre = nombre;
+    public NodoCola(Jugador nombre) {
+        this.jugador = nombre;
         this.sig = null;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Jugador getJugador() {
+        return jugador;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setJugador(Jugador jugador) {
+        this.jugador = jugador;
     }
 
     public NodoCola getSig() {
