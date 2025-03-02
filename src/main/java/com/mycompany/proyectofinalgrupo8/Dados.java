@@ -8,10 +8,14 @@ package com.mycompany.proyectofinalgrupo8;
 public class Dados {
     private int valorDado1; //  valor del dado 1
     private int valorDado2; // valor del dado 2
+    private PilaPremios premios;
+    private PilaCastigos castigos;
 
     public Dados() {
         valorDado1 = 0;
         valorDado2 = 0;
+        premios = new PilaPremios();
+        castigos = new PilaCastigos();
     }
     
     /**
@@ -19,7 +23,7 @@ public class Dados {
     * Asigna a cada dado un valor aleatorio entre 1 y 6, que representa el resultado del lanzamiento.
     * Los valores generados se almacenan en los atributos `valorDado1` y `valorDado2`.
     */
-    public void tirar(){
+    public void tirar(ColaJugadores colaAux) throws Exception {
         setValorDado1((int)(Math.random() * 6) + 1);
         setValorDado2((int)(Math.random() * 6) + 1);
         int sumaDados = getValorDado1() + getValorDado2();      // Sumo los resultados para comparatlos
