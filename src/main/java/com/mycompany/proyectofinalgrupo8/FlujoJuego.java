@@ -77,6 +77,7 @@ public class FlujoJuego {
     public void llenarPilasBonus() {
         for (int i = 0; i <= 3; i ++) {
             // Llenar pilas premios
+            // Cambiar la descripcion de los premios
             premios.push("Cargando premio", +8);
             premios.push("Cargando premio", +2);
             premios.push("Cargando premio", +0);
@@ -99,6 +100,7 @@ public class FlujoJuego {
             System.out.println("La pila de premios esta vacia...");
             return 0;
         } else {
+            // Cambiar por premios.pop
             int premio = premios.getTop().getNumero();
             System.out.println("Haz conseguido sacar un numero par se te aplicara un premio");
             System.out.println("Como premio avanzaras " + premio + " veces");
@@ -111,6 +113,7 @@ public class FlujoJuego {
             System.out.println("La pila de castigos esta vacia...");
             return 0;
         } else {
+            // cambiar por castigos.pop 
             int castigo = castigos.getTop().getNumero();
             System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
             System.out.println("Como castigo te retrocederas " + castigo + " veces");
