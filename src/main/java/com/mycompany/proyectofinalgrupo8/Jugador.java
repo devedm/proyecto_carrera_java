@@ -18,6 +18,17 @@ public class Jugador {
         this.numeroJugador = numeroJugador;
         this.posicion = posicion;
     }
+    
+    public int moverJugador(int movimientos){
+        int nuevaPos = this.posicion + movimientos; 
+        if(nuevaPos < 0){
+            setPosicion(0);
+            return getPosicion();
+        } else {
+            setPosicion((this.posicion + movimientos));
+            return getPosicion();
+        }
+    }
 
     /**
      * Obtiene el nombre del jugador.

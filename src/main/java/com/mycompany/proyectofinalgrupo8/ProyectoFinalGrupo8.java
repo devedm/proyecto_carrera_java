@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class ProyectoFinalGrupo8 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         
         // Inicializar Clase Dados
@@ -66,11 +66,23 @@ public class ProyectoFinalGrupo8 {
         System.out.println("Pila de Castigos:");
         pilaC.print();
         
+        // Prueba desencolar
+        Jugador jugadorPrueba = colaJ.desencolar();
+        
+        // Mostrar Jugador que se desencolo
+        System.out.println("Se ha desencolado al jugador " + jugadorPrueba.getNombre() + " se encuentra en la posicion " + jugadorPrueba.getPosicion());
+        
         // tirar dados
         da2.tirar();
         
         // mostrar dados
         System.out.println(da2.mostrar());
+        
+        // mostrar posicion
+        System.out.println("El jugador " + jugadorPrueba.getNombre() + " se ha movido en a la posicion " + jugadorPrueba.moverJugador((da2.getValorDado1() + da2.getValorDado2())));
+        
+        // Encolar jugador
+        colaJ.encolar(jugadorPrueba);
         
     }
 }
