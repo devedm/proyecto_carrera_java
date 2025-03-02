@@ -51,9 +51,9 @@ public class ProyectoFinalGrupo8 {
         }
         
         //Agregar elementos a las pilas de premios y castigos - Solo una prueba
-        pilaP.push("suma dos posiciones", 2);
+        pilaP.push("suma", 2, "suma 2 posiciones");
         
-        pilaC.push("resta tres posiciones", 3);
+        pilaC.push("resta", 3, "resta 3 posiciones");
         
         //Listar los jugadores en la cola
         System.out.println("Jugadores en cola:");

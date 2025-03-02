@@ -28,10 +28,11 @@ public class PilaGenerica {
      * Agrega un nuevo nodo a la pila con la operación y el número especificados.
      * @param operacion Nombre o descripción de la operación asociada al nodo.
      * @param numero Valor numérico asociado al nodo.
+     * @param descripcion Descripcion del premio/castigo
      */
-    public void push(String operacion, int numero){
+    public void push(String operacion, int numero, String descripcion){
         
-        NodoPila miNodo = new NodoPila(operacion, numero);
+        NodoPila miNodo = new NodoPila(operacion, numero, descripcion);
         if(isEmpty()){
             top = miNodo;
         }else{

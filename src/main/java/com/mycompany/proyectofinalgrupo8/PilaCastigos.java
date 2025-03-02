@@ -14,4 +14,13 @@ public class PilaCastigos extends PilaGenerica{
         super();
     }
     
+    
+    public void mostrarCastigos(){
+        System.out.println("Castigos disponibles: ");
+        NodoPila temp = getTop();
+        while (temp != null){
+            System.out.println("El castigo con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y retrocedera " + temp.getNumero() + " posiciones");
+            temp = temp.getSig();
+        }
+    }
 }

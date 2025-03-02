@@ -14,4 +14,14 @@ public class PilaPremios extends PilaGenerica {
         super();
     }
     
+ 
+    public void mostrarPremios(){
+        System.out.println("Premios disponibles: ");
+        NodoPila temp = getTop();
+        while (temp != null){
+            System.out.println("El premio con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y adelantara " + temp.getNumero() + " posiciones");
+            temp = temp.getSig();
+        }
+        
+    }
 }

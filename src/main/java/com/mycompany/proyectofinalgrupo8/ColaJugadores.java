@@ -147,4 +147,28 @@ public class ColaJugadores {
             actual = actual.getSig();
         }
     }
+    
+    public void mostrarPosicionCola(){
+        if (esVacia()){
+            System.out.println("La cola esta vacia.");
+            return;
+        }
+        
+        NodoCola actual = this.frente;
+        int contador = 1;
+        while(actual != null){
+            System.out.println("El jugador " + actual.getJugador().getNombre() + " esta en la posicion " + contador + " de la cola");
+            contador++;
+        }
+    }
+    
+    public void mostrarTurno(){
+        if (esVacia()){
+            System.out.println("La cola esta vacia.");
+            return;
+        }
+        
+        NodoCola actual = this.frente;
+        System.out.println("Es el turno del jugador: " + actual.getJugador().getNombre());
+    }
 }
