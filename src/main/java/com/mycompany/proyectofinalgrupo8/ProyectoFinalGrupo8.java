@@ -73,7 +73,7 @@ public class ProyectoFinalGrupo8 {
         System.out.println("Se ha desencolado al jugador " + jugadorPrueba.getNombre() + " se encuentra en la posicion " + jugadorPrueba.getPosicion());
         
         // tirar dados
-        da2.tirar(colaJ);
+        da2.tirar();
         
         // mostrar dados
         System.out.println(da2.mostrar());
