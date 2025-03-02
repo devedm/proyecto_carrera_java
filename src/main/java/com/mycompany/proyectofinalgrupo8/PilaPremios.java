@@ -7,6 +7,7 @@ package com.mycompany.proyectofinalgrupo8;
 /**
  *
  * @author fernandafajardo
+ * @author William Bastos
  */
 public class PilaPremios extends PilaGenerica {
 
@@ -14,4 +15,16 @@ public class PilaPremios extends PilaGenerica {
         super();
     }
     
+    /**
+     * Muestra el contenido de la pila de premios.
+     */
+    public void mostrarPremios(){
+        System.out.println("Premios disponibles: ");
+        NodoPila temp = getTop();
+        while (temp != null){
+            System.out.println("El premio con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y adelantara " + temp.getNumero() + " posiciones");
+            temp = temp.getSig();
+        }
+        
+    }
 }

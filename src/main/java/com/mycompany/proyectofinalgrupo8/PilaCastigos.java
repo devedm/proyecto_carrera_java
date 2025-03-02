@@ -7,6 +7,7 @@ package com.mycompany.proyectofinalgrupo8;
 /**
  *
  * @author fernandafajardo
+ * @author William Bastos
  */
 public class PilaCastigos extends PilaGenerica{
 
@@ -14,4 +15,15 @@ public class PilaCastigos extends PilaGenerica{
         super();
     }
     
+    /**
+     * Muestra el contenido de la pila de castigos.
+     */
+    public void mostrarCastigos(){
+        System.out.println("Castigos disponibles: ");
+        NodoPila temp = getTop();
+        while (temp != null){
+            System.out.println("El castigo con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y retrocedera " + temp.getNumero() + " posiciones");
+            temp = temp.getSig();
+        }
+    }
 }

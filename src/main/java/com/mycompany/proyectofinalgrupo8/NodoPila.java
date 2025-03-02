@@ -10,16 +10,18 @@ package com.mycompany.proyectofinalgrupo8;
  */
 public class NodoPila {
     
-    String operacion;
-    int numero;
-    NodoPila sig;
+    private String operacion;
+    private int numero;
+    private String descripcion;
+    private NodoPila sig;
 
     public NodoPila() {
     }
 
-    public NodoPila(String operacion, int numero) {
+    public NodoPila(String operacion, int numero, String descripcion) {
         this.operacion = operacion;
         this.numero = numero;
+        this.descripcion = descripcion;
         this.sig = null;
     }
 
@@ -46,7 +48,13 @@ public class NodoPila {
     public void setSig(NodoPila sig) {
         this.sig = sig;
     }
-    
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     
 }
