@@ -130,4 +130,21 @@ public class ColaJugadores {
             actual = actual.getSig();
         }
     }
+    /**
+    * Muestra la posición de todos los jugadores en la cola.
+    * Si la cola está vacía, se imprime un mensaje indicando que no hay jugadores inscritos.
+    * Recorre la cola desde el frente hasta el final, imprimiendo el nombre y la posición de cada jugador.
+    */
+    public void mostrarPosiciones(){
+        if(esVacia()){
+            System.out.println("No hay jugadores inscritos.");
+            return;
+        }
+        
+        NodoCola actual = this.frente;
+        while(actual != null){
+            System.out.println("- " + actual.getJugador().getNombre() + " Posicion: " + actual.getJugador().getPosicion());
+            actual = actual.getSig();
+        }
+    }
 }

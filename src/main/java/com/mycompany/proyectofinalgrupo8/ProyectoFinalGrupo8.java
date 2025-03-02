@@ -84,5 +84,7 @@ public class ProyectoFinalGrupo8 {
         // Encolar jugador
         colaJ.encolar(jugadorPrueba);
         
+        // mostrar posiciones de todos los jugadores
+        colaJ.mostrarPosiciones();
     }
 }
