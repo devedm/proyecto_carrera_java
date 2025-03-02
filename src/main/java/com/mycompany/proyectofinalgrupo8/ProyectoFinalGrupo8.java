@@ -15,6 +15,9 @@ public class ProyectoFinalGrupo8 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
+        // Inicializar Clase Dados
+        Dados da2 = new Dados();
+        
         //Cola de jugadores
         ColaJugadores colaJ = new ColaJugadores();
         PilaPremios pilaP = new PilaPremios();
@@ -44,7 +47,7 @@ public class ProyectoFinalGrupo8 {
         for(int i = 0; i < cantidadJ; i++){
             System.out.println("Ingrese el nombre del jugador " + (i+1) + ": ");
             String nombre = scanner.nextLine();
-            colaJ.encolar(nombre);
+            colaJ.encolar(new Jugador(nombre, (i+1), 0));
         }
         
         //Agregar elementos a las pilas de premios y castigos - Solo una prueba
@@ -62,6 +65,12 @@ public class ProyectoFinalGrupo8 {
         
         System.out.println("Pila de Castigos:");
         pilaC.print();
+        
+        // tirar dados
+        da2.tirar();
+        
+        // mostrar dados
+        System.out.println(da2.mostrar());
         
     }
 }
