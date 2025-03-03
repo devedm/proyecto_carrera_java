@@ -9,8 +9,8 @@ public class FlujoJuego {
     private PilaCastigos castigos;
     private PilaPremios premios;
 
-    public FlujoJuego (int numJugadores) {
-        this.numJugadores = numJugadores;
+    public FlujoJuego () {
+        this.numJugadores = 0;
         this.jugadoresArray = new Jugador[numJugadores];
         this.colaJugadores = new ColaJugadores();
         this.premios = new PilaPremios();
@@ -69,7 +69,7 @@ public class FlujoJuego {
     public void llenarColaJugadores() {
         for (Jugador jugador : jugadoresArray) {
             colaJugadores.encolar(jugador);
-            System.out.println("El juagador " + jugador + "ha sido agregado a la cola");
+            System.out.println("El jugador " + jugador.getNombre() + "ha sido agregado a la cola");
         }
     }
 
@@ -120,18 +120,19 @@ public class FlujoJuego {
         Scanner scanner = new Scanner(System.in);
         int totalDa2 = 0;
         Dados da2 = new Dados();
-
-        NodoCola jugadorTurno = new NodoCola(colaJugadores.getFrente().getJugador());
-        System.out.println("Sigue el jugador: " + jugadorTurno.getJugador().getNombre() +
+        
+        Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
+        System.out.println("Sigue el jugador: " + jugadorTurno.getNombre() +
                 "Presione enter para lanzar los dados");
         scanner.nextLine();
         da2.tirar();
+        da2.mostrar();
         totalDa2 = da2.getValorDado2() + da2.getValorDado1();
         if (totalDa2 % 2 == 0) {
-            jugadorTurno.getJugador().setPosicion(aplicarPremio());
+            jugadorTurno.setPosicion(aplicarPremio());
             colaJugadores.encolar(colaJugadores.desencolar());
         } else {
-            jugadorTurno.getJugador().setPosicion(aplicarCastigo());
+            jugadorTurno.setPosicion(aplicarCastigo());
             colaJugadores.encolar(colaJugadores.desencolar());
         }
     }
