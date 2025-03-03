@@ -73,23 +73,5 @@ public class Dados {
     public void setValorDado2(int valorDado2) {
         this.valorDado2 = valorDado2;
     }
-
-
-
-    public PilaPremios getPremios() {
-        return premios;
-    }
-
-    public void setPremios(PilaPremios premios) {
-        this.premios = premios;
-    }
-
-    public PilaCastigos getCastigos() {
-        return castigos;
-    }
-
-    public void setCastigos(PilaCastigos castigos) {
-        this.castigos = castigos;
-    }
 }
 
