@@ -18,7 +18,7 @@ public class ProyectoFinalGrupo8 {
         FlujoJuego flujoJ = new FlujoJuego();
         
         do {            
-            System.out.println("1.Jugar\n2.Ayuda\n3.Salir\nSeleccione la opcion deseada: ");
+            System.out.println("1.Jugar\n2.Versión del juego\n3.Salir\nSeleccione la opcion deseada: ");
             opcionMenu = scanner.next();
             int numeroJugadores = 0;
             switch (opcionMenu) {
@@ -49,6 +49,7 @@ public class ProyectoFinalGrupo8 {
 
                 }
                 case "2" -> {
+                    Ayuda.mostrarAyuda();
                 }
                 default -> throw new AssertionError();
             }
