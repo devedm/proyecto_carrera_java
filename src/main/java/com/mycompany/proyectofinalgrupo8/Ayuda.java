@@ -16,13 +16,13 @@ public class Ayuda {
     private static String version = "1.0.";
     private static int versionNumero = 1; // Incrementa cada vez que haya un avance
     
-    private static String desarrolladores = "Eddy, Fernanda, Andres, William";
+    private static String desarrolladores = "\nEddy Mena \nFernanda Fajardo \nWilliam Bastos \nAndrés Martínez\n";
 
     /***
      * Muestra la versión actual del juego y los desarrolladores.
      */
     public static void mostrarAyuda(){
-        System.out.println("Versión del juego: V " + version + versionNumero);
+        System.out.println("\nVersión del juego: V " + version + versionNumero);
         System.out.println("Desarrollado por Grupo 8: " + desarrolladores);
     }
     
