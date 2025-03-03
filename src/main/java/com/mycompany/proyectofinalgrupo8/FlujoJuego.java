@@ -2,6 +2,12 @@ package com.mycompany.proyectofinalgrupo8;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author fernandafajardo
+ * @author Andres Martinez
+ */
+
 public class FlujoJuego {
     private int numJugadores, tamPista;
     private Jugador[] jugadoresArray;
@@ -65,14 +71,19 @@ public class FlujoJuego {
         this.premios = premios;
     }
 
-    //Metodos
+    /***
+     * Llena la cola de jugadores con los jugadores del arreglo "jugadoresArray".
+     */
     public void llenarColaJugadores() {
         for (Jugador jugador : jugadoresArray) {
             colaJugadores.encolar(jugador,true);
             System.out.println("El jugador " + jugador.getNombre() + "ha sido agregado a la cola");
         }
     }
-
+    
+    /***
+     * Llena la pila "premios" con bonificaciónes o castigos.
+     */
     public void llenarPilasBonus() {
         premios.push("+",8,"Cargando premio");
         premios.push("+",2,"Cargando premio");
@@ -83,6 +94,7 @@ public class FlujoJuego {
         premios.push("-",1,"Cargando castigo");
         premios.push("-",5,"Cargando castigo");
     }
+    
     public boolean hayPremio() {
         return premios.getTop() == null;
     }
@@ -90,53 +102,44 @@ public class FlujoJuego {
     public boolean hayCastigo() {
         return castigos.getTop() == null;
     }
+    
+    /***
+     * Extrae un premio de la pila y devuelve la cantidad de avances que se aplicarán.
+     * @return La cantidad de movimientos adicionales que obtiene el jugador como premio
+     */
     public int aplicarPremio() {
-        if (hayPremio()) {
-            System.out.println("La pila de premios esta vacia...");
+        if (!hayPremio()) {
+            System.out.println("La pila de premios está vacía...");
             return 0;
         } else {
-            // Cambiar por premios.pop
-            int premio = premios.getTop().getNumero();
-            System.out.println("Haz conseguido sacar un numero par se te aplicara un premio");
-            System.out.println("Como premio avanzaras " + premio + " veces");
+            int premio = premios.pop().getNumero();
+            System.out.println("Haz conseguido sacar un número par se te aplicará un premio");
+            System.out.println("Como premio avanzarás " + premio + " veces");
             return premio;
         }
     }
-
+    
+    /***
+     * Extrae un castigo de la pila y devuelve la cantidad de retrocesos que se aplicarán.
+     * @return La cantidad de movimientos que le jugador debe retroceder como castigo
+     */
     public int aplicarCastigo() {
-        if (hayCastigo()) {
-            System.out.println("La pila de castigos esta vacia...");
+        if (!hayCastigo()) {
+            System.out.println("La pila de castigos está vacía...");
             return 0;
         } else {
-            // cambiar por castigos.pop 
-            int castigo = castigos.getTop().getNumero();
-            System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
-            System.out.println("Como castigo te retrocederas " + castigo + " veces");
+            int castigo = castigos.pop().getNumero();
+            System.out.println("Haz conseguido sacar un número impar se te aplicará un castigo");
+            System.out.println("Como castigo, retrocederás " + castigo + " veces");
             return castigo;
         }
     }
-
-//    public void juego() throws Exception {
-//        Scanner scanner = new Scanner(System.in);
-//        int totalDa2 = 0;
-//        Dados da2 = new Dados();
-//        
-//        Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
-//        System.out.println("Jugador: " + jugadorTurno.getNombre() +
-//                " presione enter para lanzar los dados");
-//        scanner.nextLine();
-//        da2.tirar();
-//        da2.mostrar();
-//        totalDa2 = da2.getValorDado2() + da2.getValorDado1();
-//        if (totalDa2 % 2 == 0) {
-//            jugadorTurno.setPosicion(aplicarPremio());
-//            colaJugadores.encolar(colaJugadores.desencolar());
-//        } else {
-//            jugadorTurno.setPosicion(aplicarCastigo());
-//            colaJugadores.encolar(colaJugadores.desencolar());
-//        }
-//    }
     
+    /***
+     * Inicia el juego, permitiendo que cada jugador tenga su turno lanzando los dados.
+     * Dependiendo del resultado, se les aplicará un premio o castigo.
+     * @throws Exception Si ocurre un error inesperado durante la ejecución del juego
+     */
     public void juego() throws Exception{
         Scanner scanner =  new Scanner(System.in);
         int totalDa2 = 0;
@@ -171,8 +174,5 @@ public class FlujoJuego {
             colaJugadores.encolar(colaJugadores.desencolar(), false);
         }
     }
-
-    
-
 
 }
