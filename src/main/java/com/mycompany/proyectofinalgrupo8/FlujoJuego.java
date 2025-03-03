@@ -1,6 +1,5 @@
 package com.mycompany.proyectofinalgrupo8;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class FlujoJuego {
@@ -75,17 +74,14 @@ public class FlujoJuego {
     }
 
     public void llenarPilasBonus() {
-        for (int i = 0; i <= 3; i ++) {
-            // Llenar pilas premios
-            premios.push("Cargando premio", +8);
-            premios.push("Cargando premio", +2);
-            premios.push("Cargando premio", +0);
-            // Lenar pilas castigos
-            castigos.push("Cargando castigo", -3);
-            castigos.push("Cargando castigo", -1);
-            castigos.push("Cargando castigo", -5);
+        premios.push("+",8,"Cargando premio");
+        premios.push("+",2,"Cargando premio");
+        premios.push("+",0,"Cargando premio");
 
-        }
+        // Lenar pilas castigos
+        premios.push("-",3,"Cargando castigo");
+        premios.push("-",1,"Cargando castigo");
+        premios.push("-",5,"Cargando castigo");
     }
     public boolean hayPremio() {
         return premios.getTop() == null;
@@ -99,6 +95,7 @@ public class FlujoJuego {
             System.out.println("La pila de premios esta vacia...");
             return 0;
         } else {
+            // Cambiar por premios.pop
             int premio = premios.getTop().getNumero();
             System.out.println("Haz conseguido sacar un numero par se te aplicara un premio");
             System.out.println("Como premio avanzaras " + premio + " veces");
@@ -111,6 +108,7 @@ public class FlujoJuego {
             System.out.println("La pila de castigos esta vacia...");
             return 0;
         } else {
+            // cambiar por castigos.pop 
             int castigo = castigos.getTop().getNumero();
             System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
             System.out.println("Como castigo te retrocederas " + castigo + " veces");
