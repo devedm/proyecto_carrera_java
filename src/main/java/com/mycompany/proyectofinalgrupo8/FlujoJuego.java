@@ -122,8 +122,8 @@ public class FlujoJuego {
         Dados da2 = new Dados();
         
         Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
-        System.out.println("Sigue el jugador: " + jugadorTurno.getNombre() +
-                "Presione enter para lanzar los dados");
+        System.out.println("Jugador: " + jugadorTurno.getNombre() +
+                " presione enter para lanzar los dados");
         scanner.nextLine();
         da2.tirar();
         da2.mostrar();
