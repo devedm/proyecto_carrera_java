@@ -18,7 +18,7 @@ public class Jugador {
         this.numeroJugador = numeroJugador;
         this.posicion = posicion;
     }
-    
+
     public int moverJugador(int movimientos){
         int nuevaPos = this.posicion + movimientos; 
         if(nuevaPos < 0){
