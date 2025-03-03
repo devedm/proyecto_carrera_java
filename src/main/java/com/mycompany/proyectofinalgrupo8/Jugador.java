@@ -84,5 +84,9 @@ public class Jugador {
         this.posicion = posicion;
     }
     
-    
+    @Override
+    public String toString(){
+        return getNombre();
+    }
+
 }
