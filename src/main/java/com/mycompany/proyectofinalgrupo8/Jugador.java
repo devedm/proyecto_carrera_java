@@ -19,6 +19,14 @@ public class Jugador {
         this.posicion = posicion;
     }
 
+    /**
+    * Mueve al jugador a una nueva posición basada en el resultado de los dados, un bono "+" , castigo "-" y una operación específica "=".
+    * 
+    * @param dados El valor obtenido al lanzar los dados, que determina cuánto avanzará o retrocederá el jugador.
+    * @param bonus El valor del bono o castigo que se aplicará al jugador dependiendo de la operación.
+    * @param operacion La operación a realizar: "+" para aplicar un bono, "-" para aplicar un castigo, o "=" para retroceder a la posición 1.
+    * @return La nueva posición del jugador después de aplicar la operación.
+    */
     public int moverJugador(int dados, int bonus, String operacion){
         int nuevaPos = 0;
         if(operacion == "+"){

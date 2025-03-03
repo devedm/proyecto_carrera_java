@@ -6,6 +6,7 @@ import java.util.Scanner;
  *
  * @author fernandafajardo
  * @author Andres Martinez
+ * @author Eddy Mena Lopez
  */
 
 public class FlujoJuego {
@@ -108,10 +109,19 @@ public class FlujoJuego {
         return castigos.getTop() == null;
     }
     
+    /**
+    * Aplica un premio o movimiento especial al jugador basado en la pila de premios disponible.
+    * 
+    * @param jugador El jugador al que se le aplicará el premio o movimiento.
+    * @param dados El valor obtenido al lanzar los dados, que se utilizará para mover al jugador.
+    * @return El valor del premio aplicado o el valor de los dados si no hay premios disponibles.
+    */
     public int aplicarPremio(Jugador jugador, int dados) {
         if (hayPremio()) {
             System.out.println("La pila de premios esta vacia...");
-            return 0;
+            jugador.moverJugador(dados, 0, "+");
+            System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + jugador.getPosicion());
+            return dados;
         } else {
             NodoPila premio = premios.pop();
             int numero = premio.getNumero();
@@ -122,11 +132,20 @@ public class FlujoJuego {
         }
     }
 
+    /**
+    * Aplica un castigo o movimiento especial al jugador basado en la pila de castigos disponible.
+    * 
+    * @param jugador El jugador al que se le aplicará el castigo o movimiento.
+    * @param dados El valor obtenido al lanzar los dados, que se utilizará para mover al jugador.
+    * @return El valor del castigo aplicado o el valor de los dados si no hay castigos disponibles.
+    */
     public int aplicarCastigo(Jugador jugador, int dados) {
         
         if (hayCastigo()) {
             System.out.println("La pila de castigos esta vacia...");
-            return 0;
+            jugador.moverJugador(dados , 0, "+");
+            System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + jugador.getPosicion());
+            return dados;
         } else {
             // cambiar por castigos.pop 
             NodoPila castigo = castigos.pop();
@@ -138,15 +157,56 @@ public class FlujoJuego {
             return castigo.getNumero();
         }
     }
-
+    
+    /**
+    * Valida si un jugador ha alcanzado o superado la posición requerida para ganar.
+    * 
+    * @param jugadorActual El jugador cuya posición se va a validar.
+    * @return `true` si el jugador ha alcanzado o superado el tamaño de la pista, `false` en caso contrario.
+    */
     public boolean validarGanador(Jugador jugadorActual){
         return jugadorActual.getPosicion() >= tamPista;
+    }
+    
+    /**
+    * Muestra al jugador ganador, si existe, en la cola de jugadores.
+    */
+    public void mostrarGanador(){
+        if (colaJugadores.esVacia()) {
+            System.out.println("No hay jugadores inscritos.");
+        }
+
+        NodoCola actual = colaJugadores.getFrente();
+        while (actual != null) {
+            if(validarGanador(actual.getJugador())){
+                System.out.println("El jugador " + actual.getJugador().getNombre() + " ha ganado.\n\n ----- FELICIDADES -----\n");
+                break;
+            }
+            actual = actual.getSig();
+        }
+    }
+    
+    /**
+    * Valida si hay jugadores inscritos en la cola de jugadores.
+    * 
+    * @return `true` si la cola de jugadores está vacía, `false` si hay jugadores inscritos.
+    */
+    public boolean validarJugadores(){
+        return colaJugadores.esVacia();
     }
     
 
     /***
      * Inicia el juego, permitiendo que cada jugador tenga su turno lanzando los dados.
-     * Dependiendo del resultado, se les aplicará un premio o castigo.
+     * Este método controla el flujo del juego:
+     * 1. Itera sobre cada jugador en la cola de jugadores.
+     * 2. En cada turno, el jugador lanza los dados y se calcula el total obtenido.
+     * 3. Si el total de los dados es par, se aplica un premio al jugador; si es impar, se aplica un castigo.
+     * 4. Se verifica si el jugador ha alcanzado o superado la posición requerida para ganar.
+     * 5. Si hay un ganador, se muestra un mensaje de felicitación y el juego termina.
+     * 6. Si no hay ganador, el jugador se mueve al final de la cola y el turno pasa al siguiente jugador.
+     * 7. Al final de cada ronda, se muestran las posiciones actuales de todos los jugadores.
+     * 8. El juego continúa hasta que un jugador gana o no hay mas jugadores.
      * @throws Exception Si ocurre un error inesperado durante la ejecución del juego
      */
 
@@ -160,14 +220,18 @@ public class FlujoJuego {
             
             //Loop para que cada jugador tenga su turno
             for(int i = 0; i < numJugadores; i++){
-                Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
+                
+                if(hayGanador){
+                    break;
+                }
+                
+                Jugador jugadorTurno = colaJugadores.desencolar();
 
                 //Muestra quien es el siguiente en jugar
                 colaJugadores.mostrarTurno();
 
                 //Para mostrar los dados el jugador debera de dar Enter
-                System.out.println("----- " + jugadorTurno.getNombre() + " jugando -----");
-                System.out.println("El jugador " + jugadorTurno.getNombre() + " se encuentra en la posicion " + jugadorTurno.getPosicion());
+                System.out.println("----- " + jugadorTurno.getNombre() + " Posicion " + jugadorTurno.getPosicion() + " -----");
                 System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados.");
                 scanner.nextLine();
 
@@ -184,24 +248,24 @@ public class FlujoJuego {
                 }else{
                     aplicarCastigo(jugadorTurno, totalDa2);
                 }
-                                
+                
+                // valida si el jugador gano la partida
                 hayGanador = validarGanador(jugadorTurno);
                 
-
                 //Mueve al jugador al final de la cola
-                colaJugadores.encolar(colaJugadores.desencolar(), false);
+                // ----------- Insertar Menu para Salir o seguir jugando -----------------
+                colaJugadores.encolar(jugadorTurno, false);
+                // para salir del loop de juego en caso de que no hayan jugadores (colaJugadores.esVacia()) puedes usar (hayGanador = true) para a tirar el mensaje de que no hay jugadores.
+                
                 
                 System.out.println("----- Fin del turno de " + jugadorTurno.getNombre() + " -----");
             }
             
             System.out.println("----- Posiciones en este turno -----");
-            colaJugadores.mostrarPosiciones();
+            colaJugadores.mostrarPosiciones();    
+            mostrarGanador();
             
-        } while (!hayGanador);
-        
-        
-        
-        
+        } while (!hayGanador);     
     }
 
 }
