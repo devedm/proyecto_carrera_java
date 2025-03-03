@@ -136,7 +136,7 @@ public class ColaJugadores {
 
         NodoCola actual = this.frente;
         while (actual != null) {
-            System.out.println("- " + actual.getJugador().getNombre());
+            System.out.println("- " + actual.getJugador().toString());
             actual = actual.getSig();
         }
     }
@@ -160,6 +160,10 @@ public class ColaJugadores {
         }
     }
 
+    /**
+     * Metodo para determinar cuantos jugadores hay en la cola
+     * @return cantidad de jugadores en la cola
+     */
     public int tamanoCola() {
         int cantidadJugadores = 0;
 
@@ -176,7 +180,9 @@ public class ColaJugadores {
         return cantidadJugadores;
     }
 
-    
+    /**
+     * Muestra la posicion de cada jugador en la cola
+     */
     public void mostrarPosicionCola() {
         if (esVacia()) {
             System.out.println("No hay jugadores en la cola.");
@@ -207,4 +213,39 @@ public class ColaJugadores {
         System.out.println("\nEs el turno del jugador: " + actual.getJugador().getNombre());
     }
 
+    
+    /**
+     * Remueve de la cola el jugador cuyo ID coincide con el parametro dado
+     * @param id id del jugador que quiere salir del juego
+     * @return {@code true} si encontro y removio un jugador con el ID especificado
+     *         {@code false} no encontro un jugador con el ID especificado
+     * @throws java.lang.Exception si la cola esta vacia ya que utiliza el metodo desencolar()
+     */
+    public boolean removerJugadorPorId(int id) throws Exception{
+        if (esVacia()){
+            return false;
+        }
+        
+        // si el jugador a remover es el de la cabeza de la cola
+        if (frente.getJugador().getNumeroJugador() == id){
+            desencolar();
+            return true;
+        }
+        NodoCola anterior = frente;
+        NodoCola actual = frente.getSig();
+        
+        while (actual != null){
+            if (actual.getJugador().getNumeroJugador() == id){
+                anterior.setSig(actual.getSig());
+                // si se elimina el ultimo
+                if (actual == ultimo){
+                    ultimo = anterior;
+                }
+                return true;
+            }
+            anterior = actual;
+            actual = actual.getSig();
+        }
+        return false;
+    }
 }
