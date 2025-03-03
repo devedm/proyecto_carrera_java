@@ -7,6 +7,7 @@ import java.util.Scanner;
  * @author fernandafajardo
  * @author Andres Martinez
  * @author Eddy Mena Lopez
+ * @author William Bastos Morales
  */
 
 public class FlujoJuego {
@@ -225,15 +226,38 @@ public class FlujoJuego {
                     break;
                 }
                 
-                Jugador jugadorTurno = colaJugadores.desencolar();
+                Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
 
                 //Muestra quien es el siguiente en jugar
                 colaJugadores.mostrarTurno();
 
                 //Para mostrar los dados el jugador debera de dar Enter
                 System.out.println("----- " + jugadorTurno.getNombre() + " Posicion " + jugadorTurno.getPosicion() + " -----");
-                System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados.");
-                scanner.nextLine();
+                System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados o escriba 'salir' para abandonar la partida: ");
+                String input = scanner.nextLine();
+                
+                if (input.equalsIgnoreCase("salir")){
+                    try{
+                        if (colaJugadores.removerJugadorPorId(jugadorTurno.getNumeroJugador())){
+                            numJugadores--; // actualiza el numero de jugadores si algun jugador abandona la partida
+                            System.out.println(jugadorTurno.getNombre() + " ha abandonado la partida");
+                            // si todos los jugadores abandonan la partida, se acaba el juego
+                            if (colaJugadores.esVacia()){
+                                System.out.println("No quedan jugadores en la partida. Fin del juego.");
+                                return;
+                            }
+                            continue;
+                        }
+                        else{
+                            System.out.println("No se pudo remover a " + jugadorTurno.getNombre() + ". Se continuara con el turno");
+                        }
+                    }catch(Exception e){
+                        System.out.println("Error al intentar abandonar la partida: " + e.getMessage());
+                    }
+                }
+                
+                // si no se escribe la palabra "salir" se procede con el turno normal desencolando al jugador para que tome su turno
+                jugadorTurno = colaJugadores.desencolar();
 
                 //Tirar dados
                 da2.tirar();
