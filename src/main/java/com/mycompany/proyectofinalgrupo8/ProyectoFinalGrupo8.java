@@ -34,7 +34,7 @@ public class ProyectoFinalGrupo8 {
                             for (int i = 0; i < numeroJugadores; i++) {
                                 System.out.print("Ingrese el nombre o alias del jugador " + (i + 1) + ": ");
                                 String nombreJugador = scanner.nextLine();
-                                flujoJ.getColaJugadores().encolar(new  Jugador(nombreJugador, (i+1), 0), true);
+                                flujoJ.encolarJugador(new Jugador(nombreJugador, (i+1), 0));
                             }
                             
                         } else {
@@ -44,14 +44,14 @@ public class ProyectoFinalGrupo8 {
                     } while (numeroJugadores <= 1 || numeroJugadores >= 5);
                     flujoJ.llenarPilasBonus();
                     flujoJ.juego();
-
-
-
                 }
                 case "2" -> {
                     Ayuda.mostrarAyuda();
                 }
-                default -> throw new AssertionError();
+                case "3" -> {
+                    System.out.println("Gracias por jugar\nSaliendo..");
+                }
+                default -> System.out.println("Error intente de nuevo");
             }
             
         } while (opcionMenu != "3");

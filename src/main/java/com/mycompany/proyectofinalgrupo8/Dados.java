@@ -35,7 +35,7 @@ public class Dados {
     *         donde X es el valor del primer dado y Y es el valor del segundo dado.
     */
     public String mostrar(){
-        return "El resultado de los dados es: " + getValorDado1() + " y " + getValorDado2(); 
+        return "El resultado de los dados es: " + getValorDado1() + " y " + getValorDado2() + " = " + (getValorDado1() + getValorDado2()) ; 
     }
 
     /**

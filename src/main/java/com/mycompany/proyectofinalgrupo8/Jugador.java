@@ -19,13 +19,30 @@ public class Jugador {
         this.posicion = posicion;
     }
 
-    public int moverJugador(int movimientos){
-        int nuevaPos = this.posicion + movimientos; 
+    public int moverJugador(int dados, int bonus, String operacion){
+        int nuevaPos = 0;
+        if(operacion == "+"){
+            System.out.println("Haz conseguido sacar un numero par se te aplicara un premio");
+            System.out.println("Como premio avanzaras " + bonus + " posiciones");
+            nuevaPos = this.posicion + (dados + bonus);
+        } else if (operacion == "-"){
+            System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
+            System.out.println("Como castigo te retrocederas " + bonus + " posiciones");
+            nuevaPos = this.posicion - (dados - bonus);
+        } else if (operacion == "="){
+            System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
+            System.out.println("Como castigo te retrocederas a la posicion 1");
+            setPosicion(1);
+            return getPosicion();
+        } else {
+            System.out.println("Error: la operacion es incorrecta");
+        }
+
         if(nuevaPos < 0){
             setPosicion(0);
             return getPosicion();
         } else {
-            setPosicion((this.posicion + movimientos));
+            setPosicion(nuevaPos);
             return getPosicion();
         }
     }
