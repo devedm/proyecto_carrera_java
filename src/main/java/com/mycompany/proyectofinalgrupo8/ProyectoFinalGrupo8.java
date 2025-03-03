@@ -13,22 +13,52 @@ import java.util.Scanner;
 public class ProyectoFinalGrupo8 {
 
     public static void main(String[] args) throws Exception {
-//        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String opcionMenu = "";
+        FlujoJuego flujoJ = new FlujoJuego();
+        
+        do {            
+            System.out.println("1.Jugar\n2.Ayuda\n3.Salir\nSeleccione la opcion deseada: ");
+            opcionMenu = scanner.next();
+            int numeroJugadores = 0;
+            switch (opcionMenu) {
+                case "1" -> {
+                    do {                        
+                        System.out.println("Ingrese el numero de jugadores: ");
+                        numeroJugadores = scanner.nextInt();
+                        scanner.nextLine();
+                        if (numeroJugadores > 1 && numeroJugadores < 5){
+                            flujoJ.setNumJugadores(numeroJugadores);
+                            flujoJ.setJugadoresArray(new Jugador[numeroJugadores]);
+                            // Solicitar el nombre o alias para cada jugador.
+                            for (int i = 0; i < numeroJugadores; i++) {
+                                System.out.print("Ingrese el nombre o alias del jugador " + (i + 1) + ": ");
+                                String nombreJugador = scanner.nextLine();
+                                flujoJ.getColaJugadores().encolar(new  Jugador(nombreJugador, (i+1), 0));
+                            }
+                            
+                        } else {
+                            System.out.println("Error: Numero incorrecto de jugadores.");
+//                            scanner.next();
+                        }
+                    } while (numeroJugadores <= 1 || numeroJugadores >= 5);
+                    flujoJ.llenarPilasBonus();
+                    flujoJ.juego();
+
+
+
+                }
+                case "2" -> {
+                }
+                default -> throw new AssertionError();
+            }
+            
+        } while (opcionMenu != "3");
+        
+        scanner.close();
 //        
-//        System.out.println("1. Jugar\n2.Ayuda\nSeleccione la opcion deseada:");
-//        switch (scanner) {
-//            case 1:
-//                
-//                break;
-//            default:
-//                throw new AssertionError();
-//        }
 //        
 //        
-//        
-//        
-//        // Inicializar Clase Dados
-//        Dados da2 = new Dados();
 //        
 //        //Cola de jugadores
 //        ColaJugadores colaJ = new ColaJugadores();
