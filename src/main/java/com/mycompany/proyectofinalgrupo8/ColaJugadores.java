@@ -60,7 +60,7 @@ public class ColaJugadores {
      *
      * @param jugador Nombre o alías del jugador
      */
-    public void encolar(Jugador jugador) {
+    public void encolar(Jugador jugador, boolean mostrarMensaje) {
 
         if (tamano >= maxJugadores) {
             System.out.println("No se pueden inscribir más jugadores. Límite alcanzado!");
@@ -77,7 +77,11 @@ public class ColaJugadores {
         }
         this.tamano++;
 
-        System.out.println("Jugador " + jugador + " añadido correctamente.");
+        //System.out.println("Jugador " + jugador + " añadido correctamente.");
+        if (mostrarMensaje) {
+            System.out.println("Jugador " + jugador.getNombre() + " añadido correctamente.");
+        }
+
     }
 
     /**
@@ -200,6 +204,7 @@ public class ColaJugadores {
         }
 
         NodoCola actual = this.frente;
-        System.out.println("Es el turno del jugador: " + actual.getJugador().getNombre());
+        System.out.println("\nEs el turno del jugador: " + actual.getJugador().getNombre());
     }
+
 }
