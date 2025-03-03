@@ -230,11 +230,23 @@ public class FlujoJuego {
 
                 //Muestra quien es el siguiente en jugar
                 colaJugadores.mostrarTurno();
-
-                //Para mostrar los dados el jugador debera de dar Enter
                 System.out.println("----- " + jugadorTurno.getNombre() + " Posicion " + jugadorTurno.getPosicion() + " -----");
-                System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados o escriba 'salir' para abandonar la partida: ");
-                String input = scanner.nextLine();
+                
+                
+                String input = "";
+                do{
+                    System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados, "
+                        + "'consultar' para ver el estado de las pilas y de la cola o escriba 'salir' para abandonar la partida.");
+                    input = scanner.nextLine();
+                    if (input.equalsIgnoreCase("consultar")){
+                        System.out.println("----- Estado de las Pilas de Premios -----");
+                        premios.mostrarPremios();
+                        System.out.println("----- Estado de las Pilas de Castigos -----");
+                        castigos.mostrarCastigos();
+                        System.out.println("----- Estado de la Cola de Jugadores -----");
+                        colaJugadores.mostrarPosiciones();
+                    }
+                }while(input.equalsIgnoreCase("consultar"));
                 
                 if (input.equalsIgnoreCase("salir")){
                     try{
