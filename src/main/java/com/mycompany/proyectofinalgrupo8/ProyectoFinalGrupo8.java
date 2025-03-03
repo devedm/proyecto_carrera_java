@@ -34,7 +34,7 @@ public class ProyectoFinalGrupo8 {
                             for (int i = 0; i < numeroJugadores; i++) {
                                 System.out.print("Ingrese el nombre o alias del jugador " + (i + 1) + ": ");
                                 String nombreJugador = scanner.nextLine();
-                                flujoJ.getColaJugadores().encolar(new  Jugador(nombreJugador, (i+1), 0));
+                                flujoJ.getColaJugadores().encolar(new  Jugador(nombreJugador, (i+1), 0), true);
                             }
                             
                         } else {

@@ -68,7 +68,7 @@ public class FlujoJuego {
     //Metodos
     public void llenarColaJugadores() {
         for (Jugador jugador : jugadoresArray) {
-            colaJugadores.encolar(jugador);
+            colaJugadores.encolar(jugador,true);
             System.out.println("El jugador " + jugador.getNombre() + "ha sido agregado a la cola");
         }
     }
@@ -116,26 +116,63 @@ public class FlujoJuego {
         }
     }
 
-    public void juego() throws Exception {
-        Scanner scanner = new Scanner(System.in);
+//    public void juego() throws Exception {
+//        Scanner scanner = new Scanner(System.in);
+//        int totalDa2 = 0;
+//        Dados da2 = new Dados();
+//        
+//        Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
+//        System.out.println("Jugador: " + jugadorTurno.getNombre() +
+//                " presione enter para lanzar los dados");
+//        scanner.nextLine();
+//        da2.tirar();
+//        da2.mostrar();
+//        totalDa2 = da2.getValorDado2() + da2.getValorDado1();
+//        if (totalDa2 % 2 == 0) {
+//            jugadorTurno.setPosicion(aplicarPremio());
+//            colaJugadores.encolar(colaJugadores.desencolar());
+//        } else {
+//            jugadorTurno.setPosicion(aplicarCastigo());
+//            colaJugadores.encolar(colaJugadores.desencolar());
+//        }
+//    }
+    
+    public void juego() throws Exception{
+        Scanner scanner =  new Scanner(System.in);
         int totalDa2 = 0;
         Dados da2 = new Dados();
         
-        Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
-        System.out.println("Jugador: " + jugadorTurno.getNombre() +
-                " presione enter para lanzar los dados");
-        scanner.nextLine();
-        da2.tirar();
-        da2.mostrar();
-        totalDa2 = da2.getValorDado2() + da2.getValorDado1();
-        if (totalDa2 % 2 == 0) {
-            jugadorTurno.setPosicion(aplicarPremio());
-            colaJugadores.encolar(colaJugadores.desencolar());
-        } else {
-            jugadorTurno.setPosicion(aplicarCastigo());
-            colaJugadores.encolar(colaJugadores.desencolar());
+        //Loop para que cada jugador tenga su turno
+        for(int i = 0; i < numJugadores; i++){
+            Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
+            
+            //Muestra quien es el siguiente en jugar
+            colaJugadores.mostrarTurno();
+            
+            //Para mostrar los dados el jugador debera de dar Enter
+            System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados.");
+            scanner.nextLine();
+            
+            //Tirar dados
+            da2.tirar();
+            //Muestra el resultado de los dados
+            System.out.println(da2.mostrar());
+            //Calcula el total de los dados
+            totalDa2 = da2.getValorDado2() + da2.getValorDado1();
+            
+            //Aplica premio o castigo en base a valor total de los dados
+            if(totalDa2 % 2 == 0){
+                jugadorTurno.setPosicion(aplicarPremio());
+            }else{
+                jugadorTurno.setPosicion(aplicarCastigo());
+            }
+            
+            //Mueve al jugador al final de la cola
+            colaJugadores.encolar(colaJugadores.desencolar(), false);
         }
     }
+
+    
 
 
 }
