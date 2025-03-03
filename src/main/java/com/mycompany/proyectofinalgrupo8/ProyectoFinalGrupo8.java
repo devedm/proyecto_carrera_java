@@ -50,6 +50,7 @@ public class ProyectoFinalGrupo8 {
                 }
                 case "3" -> {
                     System.out.println("Gracias por jugar\nSaliendo..");
+                    opcionMenu = "3";
                 }
                 default -> System.out.println("Error intente de nuevo");
             }

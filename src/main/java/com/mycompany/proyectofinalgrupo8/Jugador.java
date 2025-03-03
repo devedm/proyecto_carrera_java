@@ -28,7 +28,7 @@ public class Jugador {
         } else if (operacion == "-"){
             System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
             System.out.println("Como castigo te retrocederas " + bonus + " posiciones");
-            nuevaPos = this.posicion - (dados - bonus);
+            nuevaPos = this.posicion + (dados - bonus);
         } else if (operacion == "="){
             System.out.println("Haz conseguido sacar un numero impar se te aplicara un castigo");
             System.out.println("Como castigo te retrocederas a la posicion 1");

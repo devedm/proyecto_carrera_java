@@ -2,6 +2,12 @@ package com.mycompany.proyectofinalgrupo8;
 
 import java.util.Scanner;
 
+/**
+ *
+ * @author fernandafajardo
+ * @author Andres Martinez
+ */
+
 public class FlujoJuego {
     private int numJugadores, tamPista;
     private Jugador[] jugadoresArray;
@@ -66,7 +72,9 @@ public class FlujoJuego {
         this.premios = premios;
     }
 
-    //Metodos
+    /***
+     * Llena la cola de jugadores con los jugadores del arreglo "jugadoresArray".
+     */
     public void llenarColaJugadores() {
         for (Jugador jugador : jugadoresArray) {
             colaJugadores.encolar(jugador,true);
@@ -78,6 +86,9 @@ public class FlujoJuego {
         colaJugadores.encolar(jugadorNuevo, true);
     }
 
+    /***
+     * Llena la pila "premios" con bonificaciónes o castigos.
+     */
     public void llenarPilasBonus() {
         premios.push("+",8,"Cargando premio");
         premios.push("+",2,"Cargando premio");
@@ -88,6 +99,7 @@ public class FlujoJuego {
         castigos.push("=",1,"Cargando castigo");
         castigos.push("-",5,"Cargando castigo");
     }
+    
     public boolean hayPremio() {
         return premios.getTop() == null;
     }
@@ -95,6 +107,7 @@ public class FlujoJuego {
     public boolean hayCastigo() {
         return castigos.getTop() == null;
     }
+    
     public int aplicarPremio(Jugador jugador, int dados) {
         if (hayPremio()) {
             System.out.println("La pila de premios esta vacia...");
@@ -126,31 +139,17 @@ public class FlujoJuego {
         }
     }
 
-//    public void juego() throws Exception {
-//        Scanner scanner = new Scanner(System.in);
-//        int totalDa2 = 0;
-//        Dados da2 = new Dados();
-//        
-//        Jugador jugadorTurno = colaJugadores.getFrente().getJugador();
-//        System.out.println("Jugador: " + jugadorTurno.getNombre() +
-//                " presione enter para lanzar los dados");
-//        scanner.nextLine();
-//        da2.tirar();
-//        da2.mostrar();
-//        totalDa2 = da2.getValorDado2() + da2.getValorDado1();
-//        if (totalDa2 % 2 == 0) {
-//            jugadorTurno.setPosicion(aplicarPremio());
-//            colaJugadores.encolar(colaJugadores.desencolar());
-//        } else {
-//            jugadorTurno.setPosicion(aplicarCastigo());
-//            colaJugadores.encolar(colaJugadores.desencolar());
-//        }
-//    }
-    
     public boolean validarGanador(Jugador jugadorActual){
         return jugadorActual.getPosicion() >= tamPista;
     }
     
+
+    /***
+     * Inicia el juego, permitiendo que cada jugador tenga su turno lanzando los dados.
+     * Dependiendo del resultado, se les aplicará un premio o castigo.
+     * @throws Exception Si ocurre un error inesperado durante la ejecución del juego
+     */
+
     public void juego() throws Exception{
         Scanner scanner =  new Scanner(System.in);
         int totalDa2 = 0;
@@ -204,8 +203,5 @@ public class FlujoJuego {
         
         
     }
-
-    
-
 
 }
