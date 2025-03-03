@@ -57,4 +57,9 @@ public class NodoPila {
         this.descripcion = descripcion;
     }
     
+    @Override
+    public String toString() {
+        return "Operacion: " + operacion + ", valor: " + numero +
+               ", descripcion: " + descripcion;
+    }
 }

@@ -85,8 +85,8 @@ public class Jugador {
     }
     
     @Override
-    public String toString(){
-        return getNombre();
+    public String toString() {
+        return "Nombre: " + nombre + ", numero de jugador: " + numeroJugador +
+               ", posición : " + posicion;
     }
-
 }

@@ -27,4 +27,19 @@ public class PilaPremios extends PilaGenerica {
         }
         
     }
+    
+    /**
+     * Muestra los elementos de la Pila de premios
+     */
+    public void mostrarPila() {
+        if (isEmpty()) {
+            System.out.println("La pila de premios esta vacia.");
+        } else {
+            NodoPila actual = getTop();
+            while (actual != null) {
+                System.out.println(actual.toString());
+                actual = actual.getSig();
+            }
+        }
+    }
 }
