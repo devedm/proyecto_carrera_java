@@ -1,6 +1,5 @@
 package com.mycompany.proyectofinalgrupo8;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class FlujoJuego {
@@ -75,18 +74,14 @@ public class FlujoJuego {
     }
 
     public void llenarPilasBonus() {
-        for (int i = 0; i <= 3; i ++) {
-            // Llenar pilas premios
-            // Cambiar la descripcion de los premios
-            premios.push("Cargando premio", +8);
-            premios.push("Cargando premio", +2);
-            premios.push("Cargando premio", +0);
-            // Lenar pilas castigos
-            castigos.push("Cargando castigo", -3);
-            castigos.push("Cargando castigo", -1);
-            castigos.push("Cargando castigo", -5);
+        premios.push("+",8,"Cargando premio");
+        premios.push("+",2,"Cargando premio");
+        premios.push("+",0,"Cargando premio");
 
-        }
+        // Lenar pilas castigos
+        premios.push("-",3,"Cargando castigo");
+        premios.push("-",1,"Cargando castigo");
+        premios.push("-",5,"Cargando castigo");
     }
     public boolean hayPremio() {
         return premios.getTop() == null;
