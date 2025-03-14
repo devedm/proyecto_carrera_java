@@ -22,24 +22,18 @@ public class PilaPremios extends PilaGenerica {
         System.out.println("Premios disponibles: ");
         NodoPila temp = getTop();
         while (temp != null){
-            System.out.println("El premio con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y adelantara " + temp.getNumero() + " posiciones");
+            System.out.println("El premio con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + temp.getNumero() + " posiciones");
             temp = temp.getSig();
         }
         
     }
-    
-    /**
-     * Muestra los elementos de la Pila de premios
-     */
-    public void mostrarPila() {
-        if (isEmpty()) {
-            System.out.println("La pila de premios esta vacia.");
-        } else {
-            NodoPila actual = getTop();
-            while (actual != null) {
-                System.out.println(actual.toString());
-                actual = actual.getSig();
-            }
+
+    public void agregarPremiosAleatorios(int numero) {
+        for (int i = 0; i < numero; i++) {
+            int numeroRandom = (int)(Math.random() * 10) + 1;
+            this.push("+", numeroRandom, "Adelantas " + numeroRandom + " espacios.");
         }
     }
+    
+    
 }

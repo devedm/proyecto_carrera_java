@@ -22,23 +22,15 @@ public class PilaCastigos extends PilaGenerica{
         System.out.println("Castigos disponibles: ");
         NodoPila temp = getTop();
         while (temp != null){
-            System.out.println("El castigo con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + " y retrocedera " + temp.getNumero() + " posiciones");
+            System.out.println("El castigo con la descripcion: " + temp.getDescripcion() + " realizara la operacion: " + temp.getOperacion() + temp.getNumero() + " posiciones");
             temp = temp.getSig();
         }
     }
     
-    /**
-     * Muestra los elementos de la Pila de premios
-     */
-    public void mostrarPila() {
-        if (isEmpty()) {
-            System.out.println("La pila de castigos esta vacia.");
-        } else {
-            NodoPila actual = getTop();
-            while (actual != null) {
-                System.out.println(actual.toString());
-                actual = actual.getSig();
-            }
+    public void agregarCastigosAleatorios(int numero) {
+        for (int i = 0; i < numero; i++) {
+            int numeroRandom = (int)(Math.random() * 10) + 1;
+            this.push("-", numeroRandom, "Retrocedes " + numeroRandom + " espacios.");
         }
     }
 }
