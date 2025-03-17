@@ -221,34 +221,6 @@ public class FlujoJuego {
     }
     
     
-    public void insertarJugadorEnPosicion(Jugador jugador, int posicion) {
-        NodoCola nuevoNodo = new NodoCola(jugador);
-        if (posicion <= 0 || colaJugadores.esVacia()) {
-            nuevoNodo.setSig(colaJugadores.getFrente());
-            colaJugadores.setFrente(nuevoNodo);
-            if (colaJugadores.getUltimo() == null) {
-                colaJugadores.setUltimo(nuevoNodo);
-            }
-        } else {
-            NodoCola actual = colaJugadores.getFrente();
-            int index = 0;
-            while (actual != null && index < posicion - 1) {
-                actual = actual.getSig();
-                index++;
-            }
-            if (actual == null) {
-                // Si la posición es mayor que el tamaño, se encola normalmente
-                colaJugadores.encolar(jugador, false);
-                return;
-            }
-            nuevoNodo.setSig(actual.getSig());
-            actual.setSig(nuevoNodo);
-            if(nuevoNodo.getSig() == null) {
-                colaJugadores.setUltimo(nuevoNodo);
-            }
-            // Se asume que se actualiza el tamaño internamente en la cola
-        }
-    }
 
     /***
      * Inicia el juego, permitiendo que cada jugador tenga su turno lanzando los dados.
