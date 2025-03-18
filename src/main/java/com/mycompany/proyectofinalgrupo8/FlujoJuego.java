@@ -16,6 +16,7 @@ public class FlujoJuego {
     private ColaJugadores colaJugadores;
     private PilaCastigos castigos;
     private PilaPremios premios;
+    private boolean permiteAgregarJugadores;
 
     public FlujoJuego () {
         this.numJugadores = 0;
@@ -24,6 +25,7 @@ public class FlujoJuego {
         this.colaJugadores = new ColaJugadores();
         this.premios = new PilaPremios();
         this.castigos = new PilaCastigos();
+        this.permiteAgregarJugadores = false;
     }
 
     public int getNumJugadores() {
@@ -72,6 +74,28 @@ public class FlujoJuego {
 
     public void setPremios(PilaPremios premios) {
         this.premios = premios;
+    }
+
+    public boolean isPermiteAgregarJugadores() {
+        return permiteAgregarJugadores;
+    }
+
+    public void setPermiteAgregarJugadores(boolean permiteAgregarJugadores) {
+        this.permiteAgregarJugadores = permiteAgregarJugadores;
+    }
+    
+    public void agregarJugadorAdicional(Jugador nuevoJugador) {
+        if (!permiteAgregarJugadores) {
+            System.out.println("La opción de agregar jugadores no fue permitida al inicio de la partida.");
+            return;
+        }
+        if (colaJugadores.getTamano() >= ColaGenerica.getMaxJugadores()) {
+            System.out.println("No se pueden agregar más jugadores. Límite alcanzado!");
+            return;
+        }
+        colaJugadores.encolar(nuevoJugador, true);
+        numJugadores++;
+        System.out.println("Jugador " + nuevoJugador.getNombre() + " añadido correctamente a la partida.");
     }
 
     /***
@@ -196,6 +220,7 @@ public class FlujoJuego {
         return colaJugadores.esVacia();
     }
     
+    
 
     /***
      * Inicia el juego, permitiendo que cada jugador tenga su turno lanzando los dados.
@@ -218,7 +243,6 @@ public class FlujoJuego {
         boolean hayGanador = false; // validar si se gano el juego para salir del loop de juego
         
         do {
-            
             //Loop para que cada jugador tenga su turno
             for(int i = 0; i < numJugadores; i++){
                 
@@ -234,9 +258,12 @@ public class FlujoJuego {
                 
                 
                 String input = "";
+                boolean seleccionValida = false;
+                
                 do{
-                    System.out.println("\n" + jugadorTurno.getNombre() + ", presione enter para lanzar los dados, "
-                        + "'consultar' para ver el estado de las pilas y de la cola o escriba 'salir' para abandonar la partida.");
+                    System.out.println("\n" + jugadorTurno.getNombre() +
+                        ", presione enter para lanzar los dados, 'consultar' para ver el estado, " +
+                        "'salir' para abandonar la partida o 'agregar' para unir un nuevo jugador.");
                     input = scanner.nextLine();
                     if (input.equalsIgnoreCase("consultar")){
                         System.out.println("----- Estado de las Pilas de Premios -----");
@@ -245,8 +272,25 @@ public class FlujoJuego {
                         castigos.mostrarCastigos();
                         System.out.println("----- Estado de la Cola de Jugadores -----");
                         colaJugadores.mostrarPosiciones();
+                    } else if (input.equalsIgnoreCase("agregar")){
+                        // Se pregunta siempre el nombre y luego se evalúa la bandera
+                        if (!permiteAgregarJugadores) {
+                            System.out.println("La opción de agregar jugadores no fue permitida al inicio de la partida.");
+                        } else {
+                            
+                            if (colaJugadores.getTamano() < ColaGenerica.getMaxJugadores()) {
+                                System.out.print("Ingrese el nombre del nuevo jugador: ");
+                                String nuevoNombre = scanner.nextLine();
+                                Jugador nuevoJugador = new Jugador(nuevoNombre, numJugadores + 1, 0);
+                                agregarJugadorAdicional(nuevoJugador);
+                            } else {
+                                System.out.println("No se pueden agregar más jugadores, límite máximo alcanzado.");
+                            }
+                        }
+                    } else{
+                        seleccionValida = true;
                     }
-                }while(input.equalsIgnoreCase("consultar"));
+                } while(!seleccionValida);
                 
                 if (input.equalsIgnoreCase("salir")){
                     try{
@@ -301,7 +345,10 @@ public class FlujoJuego {
             colaJugadores.mostrarPosiciones();    
             mostrarGanador();
             
-        } while (!hayGanador);     
+        } while (!hayGanador);
+        
+        while (!colaJugadores.esVacia()){
+            colaJugadores.desencolar();
+        }
     }
-
 }

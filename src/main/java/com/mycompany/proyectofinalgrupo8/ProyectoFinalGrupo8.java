@@ -30,6 +30,10 @@ public class ProyectoFinalGrupo8 {
                         if (numeroJugadores > 1 && numeroJugadores < 5){
                             flujoJ.setNumJugadores(numeroJugadores);
                             flujoJ.setJugadoresArray(new Jugador[numeroJugadores]);
+                            // Solicitar la opción de agregar jugadores durante la partida.
+                            System.out.print("Desea permitir agregar jugadores durante la partida? (si/no): ");
+                            String permite = scanner.nextLine();
+                            flujoJ.setPermiteAgregarJugadores(permite.equalsIgnoreCase("si"));
                             // Solicitar el nombre o alias para cada jugador.
                             for (int i = 0; i < numeroJugadores; i++) {
                                 System.out.print("Ingrese el nombre o alias del jugador " + (i + 1) + ": ");
