@@ -115,15 +115,38 @@ public class FlujoJuego {
     /***
      * Llena la pila "premios" con bonificaciónes o castigos.
      */
-    public void llenarPilasBonus() {
-        premios.push("+",8,"Cargando premio");
-        premios.push("+",2,"Cargando premio");
-        premios.push("+",0,"Cargando premio");
-
-        // Lenar pilas castigos
+    public void llenarPilasCastigo() {
         castigos.push("-",3,"Cargando castigo");
         castigos.push("=",1,"Cargando castigo");
         castigos.push("-",5,"Cargando castigo");
+    }
+    public void llenarPilasPremios() {
+        premios.push("+",8,"Cargando premio");
+        premios.push("+",2,"Cargando premio");
+        premios.push("+",0,"Cargando premio");
+    }
+    public void llenarPilasBonus() {
+        llenarPilasPremios();
+        llenarPilasCastigo();
+    }
+
+    public void informacionPilasBonus() {
+        int contPremios = 0;
+        int contCastigos = 0;
+        NodoPila tempPremios = new NodoPila();
+        NodoPila tempCastigos = new NodoPila();
+        tempPremios = premios.getTop();
+        tempCastigos = castigos.getTop();
+        while (tempPremios != null){
+            tempPremios = tempPremios.getSig();
+            contPremios++;
+        }
+        while (tempCastigos != null) {
+            tempCastigos = tempCastigos.getSig();
+            contCastigos++;
+        }
+        System.out.println("Pila premios: " + contPremios +
+                "\nPila castigos: " + contCastigos);
     }
     
     public boolean hayPremio() {
