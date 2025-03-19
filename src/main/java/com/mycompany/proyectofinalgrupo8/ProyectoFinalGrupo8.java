@@ -26,7 +26,7 @@ public class ProyectoFinalGrupo8 {
                     "\n4.Mantener pila" +
                     "\n5.Adicionar jugador" +
                     "\n6.Estado de juego" +
-                    "\n7.Bitácora-Historiañ" +
+                    "\n7.Bitácora-Historial" +
                     "\nSeleccione la opcion deseada: ");
             opcionMenu = scanner.next();
             switch (opcionMenu) {
@@ -57,6 +57,7 @@ public class ProyectoFinalGrupo8 {
                     flujoJ.juego();
                 }
                 case "2" -> {
+                    Ayuda.incrementarVersion();
                     Ayuda.mostrarAyuda();
                 }
                 case "3" -> {
