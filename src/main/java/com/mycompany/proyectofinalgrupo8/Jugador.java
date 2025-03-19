@@ -7,16 +7,19 @@ package com.mycompany.proyectofinalgrupo8;
 /**
  *
  * @author Eddy Mena Lopez
+ * @author fernandafajardo
  */
 public class Jugador {
     private String nombre;
     private int numeroJugador;
     private int posicion;
+    private ListaEnlazada posicionesHistoricas;
 
     public Jugador(String nombre, int numeroJugador, int posicion) {
         this.nombre = nombre;
         this.numeroJugador = numeroJugador;
         this.posicion = posicion;
+        this.posicionesHistoricas = new ListaEnlazada();
     }
 
     /**
@@ -107,8 +110,13 @@ public class Jugador {
      */
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+        posicionesHistoricas.insertarPosicion(posicion);
     }
-    
+
+    public ListaEnlazada getPosicionesHistoricas() {
+        return posicionesHistoricas;
+    }
+
     @Override
     public String toString() {
         return "Nombre: " + nombre + ", numero de jugador: " + numeroJugador +
