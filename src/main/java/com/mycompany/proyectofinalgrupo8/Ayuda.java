@@ -14,7 +14,7 @@ public class Ayuda {
      * Versión base del juego en formato V 1.0.N.
      */
     private static String version = "1.0.";
-    private static int versionNumero = 1; // Incrementa cada vez que haya un avance
+    private static int versionNumero = 0; // Incrementa cada vez que haya un avance
     
     private static String desarrolladores = "\nEddy Mena \nFernanda Fajardo \nWilliam Bastos \nAndrés Martínez\n";
 
