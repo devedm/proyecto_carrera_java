@@ -14,13 +14,21 @@ public class ProyectoFinalGrupo8 {
 
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        String opcionMenu = "";
+        String opcionMenu;
+        int numeroJugadores = 0;
         FlujoJuego flujoJ = new FlujoJuego();
-        
+        flujoJ.llenarPilasBonus();
+        flujoJ.informacionPilasBonus();
         do {            
-            System.out.println("1.Jugar\n2.Versión del juego\n3.Salir\nSeleccione la opcion deseada: ");
+            System.out.println("1.Jugar" +
+                    "\n2.Versión del juego" +
+                    "\n3.Salir" +
+                    "\n4.Mantener pila" +
+                    "\n5.Adicionar jugador" +
+                    "\n6.Estado de juego" +
+                    "\n7.Bitácora-Historiañ" +
+                    "\nSeleccione la opcion deseada: ");
             opcionMenu = scanner.next();
-            int numeroJugadores = 0;
             switch (opcionMenu) {
                 case "1" -> {
                     do {                        
@@ -43,7 +51,6 @@ public class ProyectoFinalGrupo8 {
                             
                         } else {
                             System.out.println("Error: Numero incorrecto de jugadores.");
-//                            scanner.next();
                         }
                     } while (numeroJugadores <= 1 || numeroJugadores >= 5);
                     flujoJ.llenarPilasBonus();
@@ -56,10 +63,52 @@ public class ProyectoFinalGrupo8 {
                     System.out.println("Gracias por jugar\nSaliendo..");
                     opcionMenu = "3";
                 }
+                case "4" -> {
+                    System.out.println("Haz entrado a mantenimiento de pilas. Seleccione:" +
+                            "\n1. Informacion de las pilas premio y castigo" +
+                            "\n2. Llenar castigos" +
+                            "\n3. Llenar premios" +
+                            "\n4. Llenar ambos");
+                    int opcionPilas = scanner.nextInt();
+                    switch (opcionPilas){
+                        case 1 -> {
+                            System.out.println("Informacion pilas: ");
+                            flujoJ.informacionPilasBonus();
+                            System.out.println("Presione ENTER para continuar");
+                            scanner.next();
+                        }
+                        case 2 -> {
+                            flujoJ.llenarPilasCastigo();
+                            System.out.println("Presione ENTER para continuar");
+                            scanner.next();
+                        }
+                        case 3 -> {
+                            flujoJ.llenarPilasPremios();
+                            System.out.println("Presione ENTER para continuar");
+                            scanner.next();
+                        }
+                        case 4 -> {
+                            flujoJ.llenarPilasBonus();
+                            System.out.println("Presione ENTER para continuar");
+                            scanner.next();
+                        }
+                    }
+                }
+                case "5" -> {
+                    System.out.println();
+                    String nuevoJugador = scanner.nextLine();
+                    flujoJ.agregarJugadorAdicional(new Jugador(nuevoJugador,  numeroJugadores++, 0));
+                }
+                case "6" -> {
+                    System.out.println("Estado de juego");
+                }
+                case "7" -> {
+                    System.out.println("Bitacora-Historial");
+                }
                 default -> System.out.println("Error intente de nuevo");
             }
             
-        } while (opcionMenu != "3");
+        } while (opcionMenu != "Q");
         
         scanner.close();
     }
