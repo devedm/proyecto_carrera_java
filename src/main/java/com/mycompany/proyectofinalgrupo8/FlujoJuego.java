@@ -17,7 +17,8 @@ public class FlujoJuego {
     private PilaCastigos castigos;
     private PilaPremios premios;
     private boolean permiteAgregarJugadores;
-
+    private ListaDobleC jugadores;
+ 
     public FlujoJuego () {
         this.numJugadores = 0;
         this.tamPista = 20;
@@ -26,6 +27,7 @@ public class FlujoJuego {
         this.premios = new PilaPremios();
         this.castigos = new PilaCastigos();
         this.permiteAgregarJugadores = false;
+        jugadores = new ListaDobleC();
     }
 
     public int getNumJugadores() {
@@ -82,6 +84,13 @@ public class FlujoJuego {
 
     public void setPermiteAgregarJugadores(boolean permiteAgregarJugadores) {
         this.permiteAgregarJugadores = permiteAgregarJugadores;
+    }
+    
+    /***
+     * Llama al método desde la clase ListaDobleC
+     */
+    public void verBitacora(){
+        jugadores.verBitacora();
     }
     
     public void agregarJugadorAdicional(Jugador nuevoJugador) {
