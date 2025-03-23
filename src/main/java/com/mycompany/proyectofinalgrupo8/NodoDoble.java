@@ -10,22 +10,30 @@ package com.mycompany.proyectofinalgrupo8;
  */
 public class NodoDoble {
     
-    private Jugador Jugador;
+    private Jugador jugador;
+    private int posicion;
     private NodoDoble sig;
     private NodoDoble anterior;
 
+    public NodoDoble() {
+    }
+
     public NodoDoble(Jugador Jugador) {
-        this.Jugador = Jugador;
+        this.jugador = Jugador;
         this.sig = null;
         this.anterior = null;
     }
 
+    public NodoDoble(int posicion) {
+        this.posicion = posicion;
+    }
+    
     public Jugador getJugador() {
-        return Jugador;
+        return jugador;
     }
 
     public void setJugador(Jugador Jugador) {
-        this.Jugador = Jugador;
+        this.jugador = Jugador;
     }
 
     public NodoDoble getSig() {

@@ -25,18 +25,18 @@ public class ListaEnlazada {
     }
     
     /***
-     * Inserta un nuevo nodo con un jugador en la posición especificada al principio de la lista
-     * @param posicion La posición que el jugador ocupará en la lista
+     * Inserta una nueva posición en la lista al principio del historial
+     * @param posicion La posición a registrar en la lista.
      */
     public void insertarPosicion(int posicion){
         
-        NodoDoble nPosicion = new NodoDoble(new Jugador("Posición " + posicion, 0 , posicion));
+        NodoDoble nuevaPos = new NodoDoble(posicion); // Nodo almancena un int posicion del jugador
         
         if(top == null){
-            top = nPosicion;
+            top = nuevaPos;
         }else{
-            nPosicion.setSig(top);
-            top = nPosicion;
+            nuevaPos.setSig(top);
+            top = nuevaPos;
         }
     }
     
