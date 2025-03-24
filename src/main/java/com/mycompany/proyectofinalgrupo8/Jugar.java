@@ -15,14 +15,16 @@ public class Jugar {
     private PilaCastigos castigos;
     private PilaPremios premios;
     private ListaCircular laberinto;
+    private ListaDobleC bitacora;
     private Dados da2;
     Scanner scanner;
  
-    public Jugar(ColaJugadores colaJugadores, PilaPremios premios, PilaCastigos castigos, ListaCircular laberinto) {
+    public Jugar(ColaJugadores colaJugadores, PilaPremios premios, PilaCastigos castigos, ListaCircular laberinto, ListaDobleC bitacora) {
         this.colaJugadores = colaJugadores;
         this.premios = premios;
         this.castigos = castigos;
         this.laberinto = laberinto;
+        this.bitacora = bitacora;
         this.da2 = new Dados();
         this.scanner = new Scanner(System.in);
     }
@@ -106,6 +108,15 @@ public class Jugar {
         return castigos.getTop() == null;
     }
     
+    public void insertarBitacora(Jugador jugador, int posicion, String Castigo){
+        NodoDoble nodoJugador = bitacora.buscarJugador(jugador);
+        if(nodoJugador != null){
+            nodoJugador.getHistorial().insertaOrdenado(posicion, Castigo);
+            System.out.println("Se ha creado entrada en la bitacora");
+        }
+        System.out.println("- NO se ha creado entrada en la bitacora");
+    }
+    
     /**
     * Aplica un premio o movimiento especial al jugador basado en la pila de premios disponible.
     * 
@@ -118,6 +129,7 @@ public class Jugar {
             System.out.println("La pila de premios esta vacia...");
             laberinto.moverJugador(jugador, dados, 0, "+");
             System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + laberinto.buscarJugador(jugador));
+            insertarBitacora(jugador, laberinto.buscarJugador(jugador), "Posicion " + laberinto.buscarJugador(jugador) + " no tiene castigos/premios");
             return dados;
         } else {
             NodoPila premio = premios.pop();
@@ -125,6 +137,7 @@ public class Jugar {
             String operacion = premio.getOperacion();
             laberinto.moverJugador(jugador, dados, numero, operacion);
             System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + laberinto.buscarJugador(jugador));
+            insertarBitacora(jugador, laberinto.buscarJugador(jugador), premio.getDescripcion());
             return premio.getNumero();
         }
     }
@@ -142,6 +155,7 @@ public class Jugar {
             System.out.println("La pila de castigos esta vacia...");
             laberinto.moverJugador(jugador, dados , 0, "+");
             System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + laberinto.buscarJugador(jugador));
+            insertarBitacora(jugador, laberinto.buscarJugador(jugador), "Posicion " + laberinto.buscarJugador(jugador) + " no tiene castigos/premios");
             return dados;
         } else {
             // cambiar por castigos.pop 
@@ -150,7 +164,7 @@ public class Jugar {
             String operacion = castigo.getOperacion();
             laberinto.moverJugador(jugador, dados , numero, operacion);
             System.out.println("El jugador " + jugador.getNombre() + " se ha movido a la posicion " + laberinto.buscarJugador(jugador));
-            
+            insertarBitacora(jugador, laberinto.buscarJugador(jugador), castigo.getDescripcion());
             return castigo.getNumero();
         }
     }
@@ -216,6 +230,54 @@ public class Jugar {
         }
         System.out.println("\n --------- Fin del turno de " + jugadorActual.getNombre() + " --------- \n");
         return esGanador;
+    }
+
+    public ColaJugadores getColaJugadores() {
+        return colaJugadores;
+    }
+
+    public void setColaJugadores(ColaJugadores colaJugadores) {
+        this.colaJugadores = colaJugadores;
+    }
+
+    public PilaCastigos getCastigos() {
+        return castigos;
+    }
+
+    public void setCastigos(PilaCastigos castigos) {
+        this.castigos = castigos;
+    }
+
+    public PilaPremios getPremios() {
+        return premios;
+    }
+
+    public void setPremios(PilaPremios premios) {
+        this.premios = premios;
+    }
+
+    public ListaCircular getLaberinto() {
+        return laberinto;
+    }
+
+    public void setLaberinto(ListaCircular laberinto) {
+        this.laberinto = laberinto;
+    }
+
+    public ListaDobleC getBitacora() {
+        return bitacora;
+    }
+
+    public void setBitacora(ListaDobleC bitacora) {
+        this.bitacora = bitacora;
+    }
+
+    public Dados getDa2() {
+        return da2;
+    }
+
+    public void setDa2(Dados da2) {
+        this.da2 = da2;
     }
 
     /***

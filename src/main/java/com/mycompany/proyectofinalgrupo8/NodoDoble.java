@@ -12,14 +12,13 @@ public class NodoDoble {
     
     private Jugador jugador;
     private int posicion;
+    private ListaEnlazada historial;
     private NodoDoble sig;
     private NodoDoble anterior;
 
-    public NodoDoble() {
-    }
-
     public NodoDoble(Jugador Jugador) {
         this.jugador = Jugador;
+        this.historial = new ListaEnlazada();
         this.sig = null;
         this.anterior = null;
     }
@@ -51,4 +50,22 @@ public class NodoDoble {
     public void setAnterior(NodoDoble anterior) {
         this.anterior = anterior;
     }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
+
+    public ListaEnlazada getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ListaEnlazada historial) {
+        this.historial = historial;
+    }
+    
+    
 }
