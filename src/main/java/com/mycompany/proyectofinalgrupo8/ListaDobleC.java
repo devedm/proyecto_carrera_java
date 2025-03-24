@@ -74,6 +74,18 @@ public class ListaDobleC {
         }
     }
     
+    public NodoDoble buscarJugador(Jugador jugador){
+        NodoDoble actual = top;
+    
+        do {
+            if (actual.getJugador().equals(jugador)) { // Comparamos el jugador del nodo con el buscado
+                return actual; // Retorna el nodo si encuentra el jugador
+            }
+            actual = actual.getSig(); // Avanza al siguiente nodo
+        } while (actual != top); // Se detiene cuando da la vuelta completa
+            return null; // Si no lo encuentra, devuelve null
+    }
+    
     /***
      * Muestra la bitácora de jugadores registrados, permitiendo navegar entre ellos
      */
@@ -89,8 +101,8 @@ public class ListaDobleC {
         
         do{
             System.out.println("Nombre: " + actual.getJugador().getNombre());
-            System.out.println("Posiciones históricas:");
-//            actual.getJugador().getPosicionesHistoricas().mostrarPosicion(); // arreglar
+            System.out.println("Posiciones historicas:");
+            actual.getHistorial().recorrer();
             
             System.out.println("\nNavegador: [Siguiente: S | Anterior: A | Salir: X]");
             opcion = scanner.nextLine().toUpperCase();

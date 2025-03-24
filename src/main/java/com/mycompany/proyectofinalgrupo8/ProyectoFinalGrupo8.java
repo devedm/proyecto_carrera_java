@@ -17,7 +17,6 @@ public class ProyectoFinalGrupo8 {
         // Variables
         boolean estaJugando = false;
         boolean permiteAgregarJugadores = true;
-        int tamanioLaberinto = 0;
         String opcionMenu = "0";
         boolean hayGanador = false;
         
@@ -62,6 +61,13 @@ public class ProyectoFinalGrupo8 {
                         NodoCola actual = colaJugadores.getFrente();
                         for (int i = 0; i < colaJugadores.tamanoCola(); i++) {
                             laberinto.insertarJugador(actual.getJugador());
+                            NodoDoble nodoJugador = bitacora.buscarJugador(actual.getJugador());
+                            if(nodoJugador != null){
+                                nodoJugador.getHistorial().insertaOrdenado(0, "Posicion 0 no tiene castigos/premios");
+                                System.out.println("Se ha creado entrada en la bitacora");
+                            } else {
+                                System.out.println("- NO se ha creado entrada en la bitacora");
+                        }
                             actual = actual.getSig();
                         }
                         System.out.println("Jugadores insertados " + laberinto.getPrimero().getNombreJugador());
@@ -86,7 +92,7 @@ public class ProyectoFinalGrupo8 {
                         estaJugando = true;
                     }
                     if(estaJugando && !colaJugadores.esVacia() && !hayGanador){
-                        Jugar jugar = new Jugar(colaJugadores, pilaPremios, pilaCastigos, laberinto);
+                        Jugar jugar = new Jugar(colaJugadores, pilaPremios, pilaCastigos, laberinto, bitacora);
                         if (jugar.turno()){
                             // si gano termina el juego
                             // limpiar pilas y colas
@@ -128,7 +134,9 @@ public class ProyectoFinalGrupo8 {
                             System.out.println("Ingrese el nombre del Jugador");
                             String nuevoJugador = scanner.next();
                             int numeroJugador = colaJugadores.tamanoCola() + 1;
-                            colaJugadores.encolar(new Jugador(nuevoJugador,numeroJugador), true);
+                            Jugador jugadorObjeto = new Jugador(nuevoJugador,numeroJugador);
+                            colaJugadores.encolar(jugadorObjeto, true);
+                            bitacora.insertarJugador(jugadorObjeto);
                             
                         } 
                         if(estaJugando){
