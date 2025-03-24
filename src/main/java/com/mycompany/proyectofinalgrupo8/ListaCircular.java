@@ -145,7 +145,7 @@ public class ListaCircular {
     }
     
     public int buscarJugador(Jugador jugador){
-        int posicion = 20;
+        int posicion = 0;
 
         NodoCircular actual = getPrimero();
         NodoCircular fin = getUltimo();
@@ -155,8 +155,12 @@ public class ListaCircular {
                 return posicion;
             }
             actual = actual.getSiguiente();
+        } 
+        if(actual == fin){
+            posicion = this.tamanioLaberinto();
         }
         return posicion;
+        
     }
     
     public boolean removerJugador(Jugador jugador){      
