@@ -42,7 +42,7 @@ public class EstadoJuego {
                 } else {
                     colorEmoji = "🟥"; // Rojo
                 }
-                
+
                 // Imprimir el jugador con el color de la posición
                 System.out.println(colorEmoji + " Jugador: " + actual.getJugador().getNombre() + " | Posición: " + posicion);
                 
@@ -61,7 +61,7 @@ public class EstadoJuego {
                     color = "🟥"; // Rojo
                 }
 
-                if (actualLaberinto.getNombreJugador() == null) {
+                if (actualLaberinto.getNombreJugador() == "") {
                     // Si la posición está vacía
                     System.out.println(color + " Posición " + (i + 1) + ": 🟦 VACIA");
                 } else {
