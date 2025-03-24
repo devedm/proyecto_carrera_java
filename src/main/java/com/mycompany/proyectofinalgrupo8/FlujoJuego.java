@@ -27,7 +27,6 @@ public class FlujoJuego {
         this.premios = new PilaPremios();
         this.castigos = new PilaCastigos();
         this.permiteAgregarJugadores = false;
-        jugadores = new ListaDobleC();
     }
 
     public int getNumJugadores() {
