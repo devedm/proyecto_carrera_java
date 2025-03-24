@@ -19,6 +19,7 @@ public class ProyectoFinalGrupo8 {
         boolean permiteAgregarJugadores = true;
         int tamanioLaberinto = 0;
         String opcionMenu = "0";
+        boolean hayGanador = false;
         
         // Constantes
         int MAXIMOJUGADORES = 4;
@@ -31,6 +32,7 @@ public class ProyectoFinalGrupo8 {
         PilaPremios pilaPremios = new PilaPremios();
         ColaJugadores colaJugadores = new ColaJugadores();
         ListaCircular laberinto = new ListaCircular();
+        ListaDobleC bitacora = new ListaDobleC();
                 
         // Menu principal         
         do {            
@@ -45,7 +47,7 @@ public class ProyectoFinalGrupo8 {
             opcionMenu = scanner.next();
             switch (opcionMenu) {
                 case "1" -> {
-                    if(!estaJugando){ // primera partida se preguntan detalles de la partida
+                    if(!estaJugando && !hayGanador){ // primera partida se preguntan detalles de la partida
                         if(colaJugadores.esVacia()){
                             System.out.println("No se puede iniciar el juego sin Jugadores\n");
                             break;
@@ -83,15 +85,16 @@ public class ProyectoFinalGrupo8 {
                         }
                         estaJugando = true;
                     }
-                    if(estaJugando && !colaJugadores.esVacia()){
+                    if(estaJugando && !colaJugadores.esVacia() && !hayGanador){
                         Jugar jugar = new Jugar(colaJugadores, pilaPremios, pilaCastigos, laberinto);
                         if (jugar.turno()){
                             // si gano termina el juego
-                            estaJugando = false;
                             // limpiar pilas y colas
-                            
+                            hayGanador = true;
                         }
                         
+                    } else {
+                        System.out.println("El juego se ha acabado ya hay un ganador");
                     }
 
 //                    do {                        
@@ -151,6 +154,9 @@ public class ProyectoFinalGrupo8 {
                     
                 }
                 case "4" -> {
+                    bitacora.verBitacora();
+                }
+                case "5" -> {
                     System.out.println("Haz entrado a mantenimiento de pilas. Seleccione:" +
                             "\n1. Informacion de las pilas premio y castigo" +
                             "\n2. Llenar castigos" +
@@ -180,9 +186,6 @@ public class ProyectoFinalGrupo8 {
 //                            scanner.next();
 //                        }
 //                    }
-                }
-                case "5" -> {
-
                 }
                 case "6" -> {
                     Ayuda.incrementarVersion();
