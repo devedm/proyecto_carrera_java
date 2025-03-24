@@ -31,7 +31,7 @@ public class EstadoJuego {
             
             // Recorrer la cola de jugadores
             for (int i = 0; i < colaJugadores.tamanoCola(); i++) {
-                int posicion = laberinto.buscarJugador(actual.getJugador());
+                int posicion = laberinto.buscarJugador(actual.getJugador()) + 1;
                 
                 // Calcular el emoji de color según la posición
                 String colorEmoji = "";
@@ -62,12 +62,10 @@ public class EstadoJuego {
                 }
 
               // Verificar si la posición está vacía
-                if (actualLaberinto.getNombreJugador() == "") {
-                    // Si la posición está vacía, imprimir "VACÍA"
-                    System.out.println(color + " Posición " + (i + 1) + ": VACÍA");
-                } else {
-                    // Si hay un jugador en la posición, imprimir el nombre del jugador
-                    System.out.println(color + " Posición " + (i + 1) + ": " + actualLaberinto.getNombreJugador());
+                if(actualLaberinto.getNombreJugador().isEmpty()){
+                    System.out.println(color + " Posición " + (i+1) + ": VACÍA");
+                }else{
+                    System.out.println(color + " Posición " + (i+1) + ": " + actualLaberinto.getNombreJugador());
                 }
 
                 // Mover al siguiente nodo del laberinto
