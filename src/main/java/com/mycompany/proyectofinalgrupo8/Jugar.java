@@ -192,7 +192,8 @@ public class Jugar {
         return colaJugadores.esVacia();
     }
     
-    public void turno() throws Exception{
+    public boolean turno() throws Exception{
+        boolean esGanador = false;
         Jugador jugadorActual = colaJugadores.desencolar(); // saco al jugador de la cola
         System.out.println("\n --------- Jugando " + jugadorActual.getNombre() + " --------- ");
         System.out.println("Presione enter para tirar los dados o escriba \"salir\" para salir del juego");
@@ -209,8 +210,12 @@ public class Jugar {
                 aplicarCastigo(jugadorActual, totalDa2);
             }  
             colaJugadores.encolar(jugadorActual, false); // lo vuelvo a agregar a la cola
+            if (laberinto.buscarJugador(jugadorActual) == laberinto.tamanioLaberinto()) {
+                esGanador = true;
+            }
         }
         System.out.println("\n --------- Fin del turno de " + jugadorActual.getNombre() + " --------- \n");
+        return esGanador;
     }
 
     /***

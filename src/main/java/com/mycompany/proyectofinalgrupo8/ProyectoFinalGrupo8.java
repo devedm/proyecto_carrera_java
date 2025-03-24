@@ -85,7 +85,12 @@ public class ProyectoFinalGrupo8 {
                     }
                     if(estaJugando && !colaJugadores.esVacia()){
                         Jugar jugar = new Jugar(colaJugadores, pilaPremios, pilaCastigos, laberinto);
-                        jugar.turno();
+                        if (jugar.turno()){
+                            // si gano termina el juego
+                            estaJugando = false;
+                            // limpiar pilas y colas
+                            
+                        }
                         
                     }
 

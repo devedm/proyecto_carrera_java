@@ -87,7 +87,7 @@ public class ListaCircular {
         }                
 
         // mover jugador a nueva posicion
-        if((posicion + nuevaPosicion) < 0){
+        if( nuevaPosicion < 0){
             System.out.println("El jugador " + jugador.getNombre() + " esta en la posicion " + buscarJugador(jugador));
             if(removerJugador(jugador)){
                 if (getPrimero().getNombreJugador().isBlank()){ // Se coloca en la primera posicion y no hay nadie
@@ -97,9 +97,38 @@ public class ListaCircular {
                     getPrimero().setNombreJugador(otrosJugadores + ":" + jugador.getNombre());                    
                 }
             }
-        } else if ((posicion + nuevaPosicion) > tamanioLaberinto()) {
+        } else if (nuevaPosicion > tamanioLaberinto()) {
             System.out.println("El jugador " + jugador.getNombre() + " esta en la posicion " + buscarJugador(jugador));
-            int posicionCalculada = tamanioLaberinto() % (posicion + nuevaPosicion);
+            int posicionCalculada = tamanioLaberinto() - (nuevaPosicion - tamanioLaberinto());
+            if(removerJugador(jugador)){
+                NodoCircular actual = getPrimero();
+                for (int i = 0; i < posicionCalculada; i++) {
+                    actual = actual.getSiguiente();
+                }
+                if (actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y no hay nadie
+                    actual.setNombreJugador(jugador.getNombre());
+                } else if (!actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y pero ya hay alguien, se coloca separado con un :
+                    String otrosJugadores = actual.getNombreJugador();
+                    actual.setNombreJugador(otrosJugadores + ":" + jugador.getNombre());                    
+                }
+            }
+            
+        } else if (nuevaPosicion == tamanioLaberinto()){
+            System.out.println("El jugador " + jugador.getNombre() + " esta en la posicion " + buscarJugador(jugador));
+            if(removerJugador(jugador)){
+                NodoCircular actual = getUltimo();
+                if (actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y no hay nadie
+                    actual.setNombreJugador(jugador.getNombre());
+                } else if (!actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y pero ya hay alguien, se coloca separado con un :
+                    String otrosJugadores = actual.getNombreJugador();
+                    actual.setNombreJugador(otrosJugadores + ":" + jugador.getNombre());                    
+                } 
+                
+                System.out.println("El jugador " + jugador.getNombre() + " ha llegado a la posicion final " + buscarJugador(jugador));
+                System.out.println("Felicidades!");
+            }
+        } else if (nuevaPosicion > 0 ){
+            System.out.println("El jugador " + jugador.getNombre() + " esta en la posicion " + buscarJugador(jugador));
             if(removerJugador(jugador)){
                 NodoCircular actual = getPrimero();
                 for (int i = 0; i < nuevaPosicion; i++) {
@@ -112,28 +141,11 @@ public class ListaCircular {
                     actual.setNombreJugador(otrosJugadores + ":" + jugador.getNombre());                    
                 }
             }
-            
-        } else if ((posicion + nuevaPosicion) > 0 ){
-            System.out.println("El jugador " + jugador.getNombre() + " esta en la posicion " + buscarJugador(jugador));
-            if(removerJugador(jugador)){
-                NodoCircular actual = getPrimero();
-                for (int i = 0; i < nuevaPosicion; i++) {
-                    actual = actual.getSiguiente();
-                }
-                if (actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y no hay nadie
-                    actual.setNombreJugador(jugador.getNombre());
-                } else if (!actual.getNombreJugador().isBlank()){ // Se coloca en la primera posicion y pero ya hay alguien, se coloca separado con un :
-                    String otrosJugadores = actual.getNombreJugador();
-                    actual.setNombreJugador(otrosJugadores + ":" + jugador.getNombre());                    
-                }
-            }
-        } else if (posicion + nuevaPosicion == tamanioLaberinto()){
-            
-        }
+        } 
     }
     
     public int buscarJugador(Jugador jugador){
-        int posicion = 0;
+        int posicion = 20;
 
         NodoCircular actual = getPrimero();
         NodoCircular fin = getUltimo();
@@ -162,7 +174,7 @@ public class ListaCircular {
                         actual.setNombreJugador(jugadores);
                     }
                 } else {
-                    System.out.println(jugadores);
+//                    System.out.println(jugadores);
                     jugadores = jugadores.replaceFirst(jugador.getNombre(), "");
                     actual.setNombreJugador(jugadores);
                 }
