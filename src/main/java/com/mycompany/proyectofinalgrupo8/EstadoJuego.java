@@ -62,7 +62,7 @@ public class EstadoJuego {
                 }
 
               // Verificar si la posición está vacía
-                if (actualLaberinto.getNombreJugador() == null) {
+                if (actualLaberinto.getNombreJugador() == "") {
                     // Si la posición está vacía, imprimir "VACÍA"
                     System.out.println(color + " Posición " + (i + 1) + ": VACÍA");
                 } else {
