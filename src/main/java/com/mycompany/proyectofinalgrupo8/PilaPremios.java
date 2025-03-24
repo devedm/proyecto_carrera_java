@@ -16,7 +16,7 @@ public class PilaPremios extends PilaGenerica {
     }
     
     /**
-     * Muestra el contenido de la pila de premios.
+     * Muestra la lista de premios disponibles en la pila.
      */
     public void mostrarPremios(){
         System.out.println("Premios disponibles: ");
@@ -27,7 +27,11 @@ public class PilaPremios extends PilaGenerica {
         }
         
     }
-
+    
+    /**
+     * Agrega premios aleatorios a la pila.
+     * @param numero Cantidad de premios a generar.
+     */
     public void agregarPremiosAleatorios(int numero) {
         for (int i = 0; i < numero; i++) {
             int numeroRandom = (int)(Math.random() * 10) + 1;
@@ -35,7 +39,11 @@ public class PilaPremios extends PilaGenerica {
             System.out.println("Los premios han sido generado con exito");
         }
     }
-
+    
+    /**
+    * Verifica si hay premios en la pila.
+    * @return true si hay al menos un premio, false si la pila está vacía.
+    */
     public boolean hayPremio(){
         return this.getTop() != null;
     }

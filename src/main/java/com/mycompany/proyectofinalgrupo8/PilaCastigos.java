@@ -14,9 +14,10 @@ public class PilaCastigos extends PilaGenerica{
     public PilaCastigos() {
         super();
     }
-    
+
     /**
-     * Muestra el contenido de la pila de castigos.
+     * Muestra la lista de castigos disponibles en la pila.
+     * Recorre la pila desde el nodo superior e imprime la descripción y la operación de cada castigo.
      */
     public void mostrarCastigos(){
         System.out.println("Castigos disponibles: ");
@@ -27,6 +28,11 @@ public class PilaCastigos extends PilaGenerica{
         }
     }
     
+    /**
+    * Agrega una cantidad específica de castigos aleatorios a la pila.
+    * Cada castigo tiene una penalización aleatoria de entre 1 y 10 posiciones.
+    * @param numero Número de castigos aleatorios a generar.
+    */
     public void agregarCastigosAleatorios(int numero) {
         for (int i = 0; i < numero; i++) {
             int numeroRandom = (int)(Math.random() * 10) + 1;
@@ -34,7 +40,11 @@ public class PilaCastigos extends PilaGenerica{
             System.out.println("Los castigos han sido generado con exito");
         }
     }
-
+    
+    /**
+     * Verifica si hay castigos en la pila.
+     * @return true si hay castigos, false si la pila está vacía.
+     */
     public boolean hayCastigo(){
         return this.getTop() != null;
     }
