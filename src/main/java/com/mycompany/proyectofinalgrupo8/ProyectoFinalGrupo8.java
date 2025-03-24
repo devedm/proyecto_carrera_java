@@ -148,18 +148,12 @@ public class ProyectoFinalGrupo8 {
                     }
                 }
                 case "3" -> {
-                    if(estaJugando){
-                        System.out.println(" --------- Estado de juego --------- ");
-                        NodoCola actual = colaJugadores.getFrente();
-                        System.out.println(" - Jugador | Posicion - ");
-                        for (int i = 0; i < colaJugadores.tamanoCola(); i++) {
-                            System.out.println("- " + actual.getJugador().getNombre() + ", " + laberinto.buscarJugador(actual.getJugador()));
-                            actual = actual.getSig();
-                        }
+                    if (estaJugando) {
+                        // Llamamos al método de la clase EstadoJuego para imprimir el estado
+                        EstadoJuego.imprimirEstadoJuego(colaJugadores, laberinto, estaJugando);
                     } else {
                         System.out.println("No hay una partida en curso.\n");
-                    }
-                    
+                    }  
                 }
                 case "4" -> {
                     bitacora.verBitacora();
