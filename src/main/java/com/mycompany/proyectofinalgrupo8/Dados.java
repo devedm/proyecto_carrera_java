@@ -8,14 +8,10 @@ package com.mycompany.proyectofinalgrupo8;
 public class Dados {
     private int valorDado1; //  valor del dado 1
     private int valorDado2; // valor del dado 2
-    private PilaPremios premios;
-    private PilaCastigos castigos;
 
     public Dados() {
         valorDado1 = 0;
         valorDado2 = 0;
-        premios = new PilaPremios();
-        castigos = new PilaCastigos();
     }
     
     /**

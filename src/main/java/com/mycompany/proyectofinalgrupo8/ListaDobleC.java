@@ -90,7 +90,7 @@ public class ListaDobleC {
         do{
             System.out.println("Nombre: " + actual.getJugador().getNombre());
             System.out.println("Posiciones históricas:");
-            actual.getJugador().getPosicionesHistoricas().mostrarPosicion();
+//            actual.getJugador().getPosicionesHistoricas().mostrarPosicion(); // arreglar
             
             System.out.println("\nNavegador: [Siguiente: S | Anterior: A | Salir: X]");
             opcion = scanner.nextLine().toUpperCase();
