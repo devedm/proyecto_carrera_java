@@ -67,7 +67,7 @@ public class ProyectoFinalGrupo8 {
                                 System.out.println("Se ha creado entrada en la bitacora");
                             } else {
                                 System.out.println("- NO se ha creado entrada en la bitacora");
-                        }
+                            }
                             actual = actual.getSig();
                         }
                         System.out.println("Jugadores insertados " + laberinto.getPrimero().getNombreJugador());
@@ -130,18 +130,20 @@ public class ProyectoFinalGrupo8 {
                 }
                 case "2" -> {
                     if(permiteAgregarJugadores){
+                        Jugador jugadorObjeto;
                         if(colaJugadores.tamanoCola() <= MAXIMOJUGADORES){
                             System.out.println("Ingrese el nombre del Jugador");
                             String nuevoJugador = scanner.next();
                             int numeroJugador = colaJugadores.tamanoCola() + 1;
-                            Jugador jugadorObjeto = new Jugador(nuevoJugador,numeroJugador);
+                            jugadorObjeto = new Jugador(nuevoJugador,numeroJugador);
                             colaJugadores.encolar(jugadorObjeto, true);
                             bitacora.insertarJugador(jugadorObjeto);
-                            
-                        } 
-                        if(estaJugando){
-                            // agregar al laberinto
-                            laberinto.insertarJugador(colaJugadores.getFrente().getJugador());
+                            if(estaJugando){
+                                // agregar al laberinto
+                                laberinto.insertarJugador(jugadorObjeto);
+                                bitacora.buscarJugador(jugadorObjeto).getHistorial().insertaOrdenado(0, "Posicion 0 no tiene castigos/premios");
+                                System.out.println("Se ha creado entrada en la bitacora");
+                            } 
                         } 
                     } else {
                         System.out.println("No se puede añadir jugador a la partida.\n");
