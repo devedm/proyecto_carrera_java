@@ -30,25 +30,6 @@ public class ColaJugadores extends ColaGenerica{
     }
 
     /**
-     * Muestra la posición de todos los jugadores en la pista. Si la cola está
-     * vacía, se imprime un mensaje indicando que no hay jugadores inscritos.
-     * Recorre la cola desde el frente hasta el final, imprimiendo el nombre y
-     * la posición de cada jugador.
-     */
-    public void mostrarPosiciones() {
-        if (esVacia()) {
-            System.out.println("No hay jugadores inscritos.");
-            return;
-        }
-
-        NodoCola actual = getFrente();
-        while (actual != null) {
-            System.out.println("- " + actual.getJugador().getNombre() + " Posicion: " + actual.getJugador().getPosicion());
-            actual = actual.getSig();
-        }
-    }
-
-    /**
      * Metodo para determinar cuantos jugadores hay en la cola
      * @return cantidad de jugadores en la cola
      */
@@ -63,6 +44,7 @@ public class ColaJugadores extends ColaGenerica{
             NodoCola actual = getFrente();
             while (actual != null) {
                 cantidadJugadores++;
+                actual = actual.getSig();
             }
         }
         return cantidadJugadores;

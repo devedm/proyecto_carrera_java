@@ -10,22 +10,29 @@ package com.mycompany.proyectofinalgrupo8;
  */
 public class NodoDoble {
     
-    private Jugador Jugador;
+    private Jugador jugador;
+    private int posicion;
+    private ListaEnlazada historial;
     private NodoDoble sig;
     private NodoDoble anterior;
 
     public NodoDoble(Jugador Jugador) {
-        this.Jugador = Jugador;
+        this.jugador = Jugador;
+        this.historial = new ListaEnlazada();
         this.sig = null;
         this.anterior = null;
     }
 
+    public NodoDoble(int posicion) {
+        this.posicion = posicion;
+    }
+    
     public Jugador getJugador() {
-        return Jugador;
+        return jugador;
     }
 
     public void setJugador(Jugador Jugador) {
-        this.Jugador = Jugador;
+        this.jugador = Jugador;
     }
 
     public NodoDoble getSig() {
@@ -43,4 +50,22 @@ public class NodoDoble {
     public void setAnterior(NodoDoble anterior) {
         this.anterior = anterior;
     }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
+    }
+
+    public ListaEnlazada getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(ListaEnlazada historial) {
+        this.historial = historial;
+    }
+    
+    
 }

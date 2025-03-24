@@ -44,24 +44,24 @@ public class ListaDobleC {
         
         NodoDoble nuevoJugador = new NodoDoble(jugador);
         if(esVacia()){ // CASO 1: La lista esta vacía
-            setTop(nuevoJugador);
-            setUltimo(nuevoJugador);
+            top = nuevoJugador;
+            ultimo = nuevoJugador;
             top.setSig(top); // apunta a sí mismo
             top.setAnterior(top); // apunta a sí mismo
         }
         else if(jugador.getNombre().compareTo(top.getJugador().getNombre()) < 0){ // CASO 2: Insertar al principio
             nuevoJugador.setSig(top);
-            top.setAnterior(nuevoJugador);
-            top = nuevoJugador;
             nuevoJugador.setAnterior(ultimo);
-            ultimo.setSig(top);
+            top.setAnterior(nuevoJugador);
+            ultimo.setSig(nuevoJugador);
+            top = nuevoJugador; // actualizamos el nuevo top
         }
         else if(jugador.getNombre().compareTo(ultimo.getJugador().getNombre()) >= 0){ // CASO 3: Inserta al final
-            ultimo.setSig(nuevoJugador);
             nuevoJugador.setAnterior(ultimo);
-            ultimo = nuevoJugador;
             nuevoJugador.setSig(top);
-            top.setAnterior(ultimo);
+            ultimo.setSig(nuevoJugador);
+            top.setAnterior(nuevoJugador);
+            ultimo = nuevoJugador; // actualizamos el nuevo último
         }else { // CASO 4: Insertar en el medio
             NodoDoble aux = top;
             while(aux.getSig() != top && aux.getSig().getJugador().getNombre().compareTo(jugador.getNombre()) < 0){
@@ -69,34 +69,53 @@ public class ListaDobleC {
             }
             nuevoJugador.setSig(aux.getSig());
             nuevoJugador.setAnterior(aux);
+            aux.getSig().setAnterior(nuevoJugador);
             aux.setSig(nuevoJugador);
-            nuevoJugador.getSig().setAnterior(nuevoJugador);
         }
     }
     
+    public NodoDoble buscarJugador(Jugador jugador){
+        NodoDoble actual = top;
+    
+        do {
+            if (actual.getJugador().equals(jugador)) { // Comparamos el jugador del nodo con el buscado
+                return actual; // Retorna el nodo si encuentra el jugador
+            }
+            actual = actual.getSig(); // Avanza al siguiente nodo
+        } while (actual != top); // Se detiene cuando da la vuelta completa
+            return null; // Si no lo encuentra, devuelve null
+    }
+    
+    /***
+     * Muestra la bitácora de jugadores registrados, permitiendo navegar entre ellos
+     */
     public void verBitacora(){
         if(esVacia()){
             System.out.println("No hay jugadores registrados.");
+            return;
         }
         
         Scanner scanner = new Scanner(System.in);
         NodoDoble actual = top;
-        String opcion = "";
+        String opcion;
         
         do{
             System.out.println("Nombre: " + actual.getJugador().getNombre());
-            System.out.println("Posiciones históricas:");
-            actual.getJugador().getPosicionesHistoricas().mostrarPosicion();
+            System.out.println("Posiciones historicas:");
+            actual.getHistorial().recorrer();
             
             System.out.println("\nNavegador: [Siguiente: S | Anterior: A | Salir: X]");
             opcion = scanner.nextLine().toUpperCase();
             
-            if(opcion.equals("S")){
-                actual = actual.getSig(); // se mueve al siguente jugador
-            }else if(opcion.equals("A")){
-                actual = actual.getAnterior(); // se mueve al anterior jugador
+            switch(opcion){
+                case "S":
+                    actual = actual.getSig();
+                    break;
+                case "A":
+                    actual = actual.getAnterior();
+                    break;
             }
-        
+            
         }while(!opcion.equals("X"));
     }
     
