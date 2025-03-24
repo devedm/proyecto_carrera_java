@@ -15,11 +15,19 @@ public class PilaGenerica {
     public PilaGenerica() {
         top = null;
     }
-
+    
+    /**
+     * Obtiene el nodo superior (top) de la pila.
+     * @return NodoPila que representa la cima de la pila.
+     */
     public NodoPila getTop() {
         return top;
     }
-
+    
+    /**
+     * Establece el nodo superior (top) de la pila.
+     * @param top NodoPila que será la nueva cima de la pila.
+     */
     public void setTop(NodoPila top) {
         this.top = top;
     }

@@ -6,7 +6,7 @@ package com.mycompany.proyectofinalgrupo8;
 
 /**
  *
- * @author minio
+ * @author Eddy Mena
  */
 public class ColaGenerica {
     
@@ -25,39 +25,82 @@ public class ColaGenerica {
         return frente;
     }
 
+    /**
+     * *
+     * Obtiene el primer jugador en la cola.
+     *
+     * @return Nodo que representa al primer jugador de la cola.
+     */
     public void setFrente(NodoCola frente) {
         this.frente = frente;
     }
 
+    /**
+     * *
+     * Obtiene el último jugador en la cola.
+     *
+     * @return Nodo que representa al último jugador de la cola.
+     */
     public NodoCola getUltimo() {
         return ultimo;
     }
 
+    /**
+     * *
+     * Establece el último jugador en la cola.
+     *
+     * @param ultimo Nodo que será el nuevo último jugador.
+     */
     public void setUltimo(NodoCola ultimo) {
         this.ultimo = ultimo;
     }
 
+    /**
+     * *
+     * Obtiene el número de jugadores en la cola.
+     *
+     * @return Cantidad de jugadores en la cola.
+     */
     public int getTamano() {
         return tamano;
     }
 
+    /**
+     * *
+     * Establece el tamaño de la cola.
+     *
+     * @param tamano Nuevo número de jugadores en la cola.
+     */
     public void setTamano(int tamano) {
         this.tamano = tamano;
     }
 
+    /**
+     * *
+     * Obtiene el número máximo permitido de jugadores en la cola.
+     *
+     * @return Límite de jugadores permitido en la cola.
+     */
     public static int getMaxJugadores() {
         return maxJugadores;
     }
 
+    /**
+     * *
+     * Modifica el número máximo de jugadores permitidos en la cola.
+     *
+     * @param maxJugadores Nuevo límite de jugadores en la cola.
+     */
     public static void setMaxJugadores(int maxJugadores) {
         ColaGenerica.maxJugadores = maxJugadores;
     }
     
-        /**
+    /**
      * *
      * Agrega un jugador a la cola si no ha alcanzado el límite permitido (4).
      *
-     * @param jugador Nombre o alías del jugador
+     * @param jugador        Objeto de tipo Jugador que será añadido a la cola.
+     * @param mostrarMensaje Indica si se debe mostrar un mensaje de confirmación.
      */
     public void encolar(Jugador jugador, boolean mostrarMensaje) {
 
@@ -85,11 +128,10 @@ public class ColaGenerica {
 
     /**
      * *
-     * Elimina y retorna el primer jugador de la cola
+     * Elimina y retorna el primer jugador de la cola.
      *
-     * @return Nombre del jugador eliminado
-     * @throws Exception Si la cola está vacía, lanza una excepción con el
-     * mensaje "Error...".
+     * @return Objeto de tipo Jugador que fue eliminado de la cola.
+     * @throws Exception Si la cola está vacía, lanza una excepción con el mensaje "Error: No hay jugadores en la cola.".
      */
     public Jugador desencolar() throws Exception {
 

@@ -12,12 +12,12 @@ package com.mycompany.proyectofinalgrupo8;
 public class Jugador {
     private String nombre;
     private int numeroJugador;
-    private ListaEnlazada posicionesHistoricas;
+
 
     public Jugador(String nombre, int numeroJugador) {
         this.nombre = nombre;
         this.numeroJugador = numeroJugador;
-        this.posicionesHistoricas = new ListaEnlazada();
+
     }
 
     /**
@@ -55,10 +55,7 @@ public class Jugador {
     public void setNumeroJugador(int numeroJugador) {
         this.numeroJugador = numeroJugador;
     }
-
-    public ListaEnlazada getPosicionesHistoricas() {
-        return posicionesHistoricas;
-    }
+    
 
     @Override
     public String toString() {
