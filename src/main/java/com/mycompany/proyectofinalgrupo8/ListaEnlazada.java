@@ -40,15 +40,4 @@ public class ListaEnlazada {
         }
     }
     
-    /***
-     * Muestra la posición en la cual se encuentra el jugador
-     */
-    public void mostrarPosicion(){
-        
-        NodoDoble actual = top;
-        while(actual != null){
-            System.out.println("Posición histórica: "+ actual.getJugador().getPosicion());
-            actual = actual.getSig();
-        }
-    }
 }
