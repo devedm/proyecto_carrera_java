@@ -61,14 +61,16 @@ public class EstadoJuego {
                     color = "🟥"; // Rojo
                 }
 
+                // Verificar si la posición está vacía
                 if (actualLaberinto.getNombreJugador() == null) {
-                    // Si la posición está vacía
-                    System.out.println(color + " Posición " + (i + 1) + ": 🟦 VACIA");
+                    // Si la posición está vacía, imprimir "VACÍA"
+                    System.out.println(color + " Posición " + (i + 1) + ": VACÍA");
                 } else {
-                    // Si hay un jugador en la posición
+                    // Si hay un jugador en la posición, imprimir el nombre del jugador
                     System.out.println(color + " Posición " + (i + 1) + ": " + actualLaberinto.getNombreJugador());
                 }
-                
+
+                // Mover al siguiente nodo del laberinto
                 actualLaberinto = actualLaberinto.getSiguiente();
             }
         } else {
