@@ -165,29 +165,38 @@ public class ProyectoFinalGrupo8 {
                             "\n3. Llenar premios" +
                             "\n4. Llenar ambos");
                     int opcionPilas = scanner.nextInt();
-//                    switch (opcionPilas){
-//                        case 1 -> {
-//                            System.out.println("Informacion pilas: ");
-//                            flujoJ.informacionPilasBonus();
-//                            System.out.println("Presione ENTER para continuar");
-//                            scanner.next();
-//                        }
-//                        case 2 -> {
-//                            flujoJ.llenarPilasCastigo();
-//                            System.out.println("Presione ENTER para continuar");
-//                            scanner.next();
-//                        }
-//                        case 3 -> {
-//                            flujoJ.llenarPilasPremios();
-//                            System.out.println("Presione ENTER para continuar");
-//                            scanner.next();
-//                        }
-//                        case 4 -> {
-//                            flujoJ.llenarPilasBonus();
-//                            System.out.println("Presione ENTER para continuar");
-//                            scanner.next();
-//                        }
-//                    }
+                    if (opcionPilas == 1){
+                        System.out.println("Informacion pilas: ");
+                        System.out.println(">----------Pila premios--------<");
+                        pilaPremios.mostrarPremios();
+                        System.out.println(">-----------Pila castigos---------<");
+                        pilaCastigos.mostrarCastigos();
+                        System.out.println("Presione ENTER para continuar");
+                    } else if (opcionPilas == 2) {
+                        System.out.println("Llenando pila premios");
+                        System.out.println("¿Cuantos premios desea agregar?");
+                        int cantPremios = scanner.nextInt();
+                        pilaPremios.agregarPremiosAleatorios(cantPremios);
+                        System.out.println("Presione ENTER para continuar");
+                    } else if (opcionPilas == 3) {
+                        System.out.println("Llenando pila castigos");
+                        System.out.println("¿Cuantos castigos desea agregar?");
+                        int cantCastigos = scanner.nextInt();
+                        pilaCastigos.agregarCastigosAleatorios(cantCastigos);
+                        System.out.println("Presione ENTER para continuar");
+                    } else if (opcionPilas == 4) {
+                        System.out.println("Llenando pila premios");
+                        System.out.println("¿Cuantos premios desea agregar?");
+                        int cantPremios = scanner.nextInt();
+                        pilaPremios.agregarPremiosAleatorios(cantPremios);
+                        System.out.println("Llenando pila castigos");
+                        System.out.println("¿Cuantos castigos desea agregar?");
+                        int cantCastigos = scanner.nextInt();
+                        pilaCastigos.agregarCastigosAleatorios(cantCastigos);
+                        System.out.println("Presione ENTER para continuar");
+                    } else {
+                        System.out.println("No es una opcion valida...");
+                    }
                 }
                 case "6" -> {
                     Ayuda.incrementarVersion();
