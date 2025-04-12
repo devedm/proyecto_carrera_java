@@ -19,23 +19,23 @@ public class ProyectoFinalGrupo8 {
     public static void main(String[] args) throws Exception {
         
         // Variables
-        boolean estaJugando = false;
-        boolean permiteAgregarJugadores = true;
-        String opcionMenu = "0";
-        boolean hayGanador = false;
+        boolean estaJugando = false; // Indica si el juego está en curso
+        boolean permiteAgregarJugadores = true; // Controla si se pueden agregar jugadores durante la partida
+        String opcionMenu = "0"; // Opción seleccionada en el menú principal
+        boolean hayGanador = false; // Indica si ya hay un ganador en la partida
         
         // Constantes
-        int MAXIMOJUGADORES = 4;
+        int MAXIMOJUGADORES = 4; // Número máximo de jugadores permitidos
         
         
         // Inicializaciones
         Scanner scanner = new Scanner(System.in); // Objeto scanner para pedir input a los jugadores
         
-        PilaCastigos pilaCastigos = new PilaCastigos();
-        PilaPremios pilaPremios = new PilaPremios();
-        ColaJugadores colaJugadores = new ColaJugadores();
-        ListaCircular laberinto = new ListaCircular();
-        ListaDobleC bitacora = new ListaDobleC();
+        PilaCastigos pilaCastigos = new PilaCastigos(); // Pila para almacenar castigos
+        PilaPremios pilaPremios = new PilaPremios(); // Pila para almacenar premios
+        ColaJugadores colaJugadores = new ColaJugadores(); // Cola para gestionar el turno de los jugadores
+        ListaCircular laberinto = new ListaCircular(); // Lista circular que representa el laberinto del juego
+        ListaDobleC bitacora = new ListaDobleC(); // Lista doblemente enlazada para el historial de jugadores
                 
         // Menu principal         
         do {            
@@ -50,6 +50,7 @@ public class ProyectoFinalGrupo8 {
             opcionMenu = scanner.next();
             switch (opcionMenu) {
                 case "1" -> {
+                    // Inicio del juego si no está en curso y no hay un ganador
                     if(!estaJugando && !hayGanador){ // primera partida se preguntan detalles de la partida
                         if(colaJugadores.esVacia()){
                             System.out.println("No se puede iniciar el juego sin Jugadores\n");
@@ -60,6 +61,8 @@ public class ProyectoFinalGrupo8 {
                         String tamanio = scanner.next();
                         laberinto = new ListaCircular();
                         laberinto.crearLaberinto(Integer.valueOf(tamanio));
+                        
+                        // Insertar jugadores en el laberinto
                         System.out.println("Se van a insertar estos jugadores: ");
                         colaJugadores.mostrarJugadores();
                         NodoCola actual = colaJugadores.getFrente();
@@ -95,44 +98,21 @@ public class ProyectoFinalGrupo8 {
                         }
                         estaJugando = true;
                     }
+                    
+                    // Inicio de los turnos del juego
                     if(estaJugando && !colaJugadores.esVacia() && !hayGanador){
                         Jugar jugar = new Jugar(colaJugadores, pilaPremios, pilaCastigos, laberinto, bitacora);
                         if (jugar.turno()){
                             // si gano termina el juego
-                            // limpiar pilas y colas
                             hayGanador = true;
                         }
                         
                     } else {
                         System.out.println("El juego se ha acabado ya hay un ganador");
                     }
-
-//                    do {                        
-//                        System.out.println("Ingrese el numero de jugadores: ");
-//                        numeroJugadores = scanner.nextInt();
-//                        scanner.nextLine();
-//                        if (numeroJugadores > 1 && numeroJugadores < 5){
-//                            flujoJ.setNumJugadores(numeroJugadores);
-//                            flujoJ.setJugadoresArray(new Jugador[numeroJugadores]);
-//                            // Solicitar la opción de agregar jugadores durante la partida.
-//                            System.out.print("Desea permitir agregar jugadores durante la partida? (si/no): ");
-//                            String permite = scanner.nextLine();
-//                            flujoJ.setPermiteAgregarJugadores(permite.equalsIgnoreCase("si"));
-//                            // Solicitar el nombre o alias para cada jugador.
-//                            for (int i = 0; i < numeroJugadores; i++) {
-//                                System.out.print("Ingrese el nombre o alias del jugador " + (i + 1) + ": ");
-//                                String nombreJugador = scanner.nextLine();
-//                                flujoJ.encolarJugador(new Jugador(nombreJugador, (i+1), 0));
-//                            }
-//                            
-//                        } else {
-//                            System.out.println("Error: Numero incorrecto de jugadores.");
-//                        }
-//                    } while (numeroJugadores <= 1 || numeroJugadores >= 5);
-//                    flujoJ.llenarPilasBonus();
-//                    flujoJ.juego();
                 }
                 case "2" -> {
+                    // Agregar jugadores si está permitido
                     if(permiteAgregarJugadores){
                         Jugador jugadorObjeto;
                         if(colaJugadores.tamanoCola() <= MAXIMOJUGADORES){
@@ -142,6 +122,8 @@ public class ProyectoFinalGrupo8 {
                             jugadorObjeto = new Jugador(nuevoJugador,numeroJugador);
                             colaJugadores.encolar(jugadorObjeto, true);
                             bitacora.insertarJugador(jugadorObjeto);
+                            
+                            // Agregar al laberinto si la partida está en curso
                             if(estaJugando){
                                 // agregar al laberinto
                                 laberinto.insertarJugador(jugadorObjeto);
@@ -154,6 +136,7 @@ public class ProyectoFinalGrupo8 {
                     }
                 }
                 case "3" -> {
+                    // Mostrar estado del juego
                     if (estaJugando) {
                         // Llamamos al método de la clase EstadoJuego para imprimir el estado
                         EstadoJuego.imprimirEstadoJuego(colaJugadores, laberinto, estaJugando);
@@ -162,9 +145,11 @@ public class ProyectoFinalGrupo8 {
                     }  
                 }
                 case "4" -> {
+                    // Ver bitácora de la partida
                     bitacora.verBitacora();
                 }
                 case "5" -> {
+                    // Mantenimiento de pilas
                     System.out.println("Haz entrado a mantenimiento de pilas. Seleccione:" +
                             "\n1. Informacion de las pilas premio y castigo" +
                             "\n2. Llenar castigos" +
@@ -205,10 +190,12 @@ public class ProyectoFinalGrupo8 {
                     }
                 }
                 case "6" -> {
+                    // Mostrar versión del juego
                     Ayuda.incrementarVersion();
                     Ayuda.mostrarAyuda();
                 }
                 case "7" -> {
+                    // Salir del juego
                     System.out.println("Gracias por jugar\nSaliendo..");
                     opcionMenu = "Q";
                 }

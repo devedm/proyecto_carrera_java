@@ -20,19 +20,31 @@ public class ListaDobleC {
         this.top = null;
         this.ultimo = null;
     }
-
+    /**
+     * Obtiene el nodo superior (top) de la estructura.
+     * @return NodoDoble que representa el nodo superior.
+     */
     public NodoDoble getTop() {
         return top;
     }
-
+    /**
+     * Establece el nodo superior (top) de la estructura.
+     * @param top NodoDoble que se asignará como el nodo superior.
+     */
     public void setTop(NodoDoble top) {
         this.top = top;
     }
-
+    /**
+     * Obtiene el último nodo de la estructura.
+     * @return NodoDoble que representa el último nodo.
+     */
     public NodoDoble getUltimo() {
         return ultimo;
     }
-
+    /**
+     * Establece el último nodo de la estructura.
+     * @param ultimo NodoDoble que se asignará como el último nodo.
+     */
     public void setUltimo(NodoDoble ultimo) {
         this.ultimo = ultimo;
     }
@@ -74,7 +86,11 @@ public class ListaDobleC {
             aux.setSig(nuevoJugador);
         }
     }
-    
+    /**
+    * Busca un jugador en la estructura de nodos dobles.
+    * @param jugador Jugador que se desea buscar.
+    * @return NodoDoble que contiene al jugador si se encuentra, de lo contrario, retorna null.
+    */
     public NodoDoble buscarJugador(Jugador jugador){
         NodoDoble actual = top;
     

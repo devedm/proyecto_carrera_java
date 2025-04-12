@@ -8,7 +8,7 @@ import com.mycompany.proyectofinalgrupo8.Jugador;
 
 /**
  *
- * @author minio
+ * @author Eddy Mena
  */
 public class ListaCircular {
     private NodoCircular primero;
@@ -19,22 +19,47 @@ public class ListaCircular {
         this.ultimo = null;
     }
 
+    /**
+     * Obtiene el primer nodo de la lista circular.
+     * 
+     * @return El primer nodo de la lista.
+     */
     public NodoCircular getPrimero() {
         return primero;
     }
 
+    /**
+     * Establece el primer nodo de la lista circular.
+     * 
+     * @param primero El nuevo primer nodo de la lista.
+     */
     public void setPrimero(NodoCircular primero) {
         this.primero = primero;
     }
 
+    /**
+     * Obtiene el último nodo de la lista circular.
+     * 
+     * @return El último nodo de la lista.
+     */
     public NodoCircular getUltimo() {
         return ultimo;
     }
 
+    /**
+     * Establece el último nodo de la lista circular.
+     * 
+     * @param ultimo El nuevo último nodo de la lista.
+     */
     public void setUltimo(NodoCircular ultimo) {
         this.ultimo = ultimo;
     }
     
+    /**
+     * Calcula el tamaño del laberinto, es decir, el número de posiciones en la lista circular.
+     * 
+     * @return El número de posiciones en el laberinto.
+     */
     public int tamanioLaberinto() {
         int posicionesLaberinto = 0;
 
@@ -57,6 +82,10 @@ public class ListaCircular {
         
     }
     
+    /**
+    * Crea un laberinto con el tamaño especificado.
+    * @param tamanio Tamaño del laberinto a crear.
+    */
     public void crearLaberinto(int tamanio){
         for (int i = 0; i <= tamanio; i++) {
             insertarOrdenado(i);
@@ -65,6 +94,13 @@ public class ListaCircular {
         
     }
     
+    /**
+     * Mueve un jugador en el laberinto según el resultado de los dados y un posible bono o castigo.
+     * @param jugador Jugador a mover.
+     * @param dados Número obtenido en los dados.
+     * @param bonus Bono o castigo aplicado.
+     * @param operacion Tipo de operación (+, -, =).
+     */
     public void moverJugador(Jugador jugador, int dados, int bonus, String operacion){
         int posicion = buscarJugador(jugador);
         int nuevaPosicion = 0;
@@ -146,6 +182,11 @@ public class ListaCircular {
         } 
     }
     
+    /**
+     * Busca la posición de un jugador en el laberinto.
+     * @param jugador Jugador a buscar.
+     * @return Posición del jugador en el laberinto.
+     */
     public int buscarJugador(Jugador jugador){
         int posicion = 0;
 
@@ -164,7 +205,11 @@ public class ListaCircular {
         return posicion;
         
     }
-    
+    /**
+     * Remueve un jugador del laberinto.
+     * @param jugador Jugador a remover.
+     * @return true si el jugador fue removido, false en caso contrario.
+     */
     public boolean removerJugador(Jugador jugador){      
         NodoCircular actual = getPrimero();
         NodoCircular fin = getUltimo();
@@ -191,6 +236,10 @@ public class ListaCircular {
         return false;
     }
     
+    /**
+     * Inserta un jugador en la primera posición del laberinto.
+     * @param jugador Jugador a insertar.
+     */
     public void insertarJugador(Jugador jugador){
         if(primero != null){
             if (getPrimero().getNombreJugador().isBlank()){ // Se coloca en la primera posicion y no hay nadie
@@ -202,7 +251,10 @@ public class ListaCircular {
         }
     }
     
-    
+    /**
+     * Inserta un nuevo nodo en la lista circular de manera ordenada.
+     * @param valor Valor del nodo a insertar.
+     */
     public void insertarOrdenado(int valor){
         // caso 1: La lista esta vacia
         if (this.primero == null){ // siginifica que la lista esta vacia
