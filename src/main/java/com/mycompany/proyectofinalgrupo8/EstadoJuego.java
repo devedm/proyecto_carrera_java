@@ -4,6 +4,10 @@
  */
 package com.mycompany.proyectofinalgrupo8;
 
+import com.mycompany.proyectofinalgrupo8.Librerias.Cola.NodoCola;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.ListaCircular;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.NodoCircular;
+
 /**
  *
  * @author fernandafajardo

@@ -4,6 +4,9 @@
  */
 package com.mycompany.proyectofinalgrupo8;
 
+import com.mycompany.proyectofinalgrupo8.Librerias.Cola.NodoCola;
+import com.mycompany.proyectofinalgrupo8.Librerias.Cola.ColaGenerica;
+
 /**
  *
  * @author fernandafajardo
