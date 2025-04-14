@@ -4,6 +4,8 @@
  */
 package com.mycompany.proyectofinalgrupo8;
 
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.ListaEnlazada;
+
 /**
  *
  * @author Eddy Mena Lopez

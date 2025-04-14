@@ -1,5 +1,9 @@
 package com.mycompany.proyectofinalgrupo8;
 
+import com.mycompany.proyectofinalgrupo8.Librerias.Pila.NodoPila;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.ListaCircular;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.NodoDoble;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.ListaDobleC;
 import java.util.Scanner;
 
 /**

@@ -4,6 +4,9 @@
  */
 package com.mycompany.proyectofinalgrupo8;
 
+import com.mycompany.proyectofinalgrupo8.Librerias.Pila.NodoPila;
+import com.mycompany.proyectofinalgrupo8.Librerias.Pila.PilaGenerica;
+
 /**
  *
  * @author fernandafajardo
