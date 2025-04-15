@@ -151,7 +151,5 @@ public class ArbolBinario {
         int alturaDer = obtenerAltura(actual.getDerecha());
         int alturaMayor = Math.max(alturaIzq, alturaDer) + 1;   // Compara cual de las 2 ramas es mas larga.
         return alturaMayor;
-                
-    
     }
 }

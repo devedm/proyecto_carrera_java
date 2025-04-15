@@ -100,5 +100,4 @@ public class ListaArbol {
             actual = actual.getSiguiente(); 
         }
     }
-    
 }
