@@ -5,6 +5,7 @@
 package com.mycompany.proyectofinalgrupo8.Librerias.Arbol;
 
 import com.mycompany.proyectofinalgrupo8.Librerias.Lista.ListaArbol;
+import com.mycompany.proyectofinalgrupo8.Librerias.Lista.NodoListaArbol;
 
 /**
  *
@@ -151,5 +152,48 @@ public class ArbolBinario {
         int alturaDer = obtenerAltura(actual.getDerecha());
         int alturaMayor = Math.max(alturaIzq, alturaDer) + 1;   // Compara cual de las 2 ramas es mas larga.
         return alturaMayor;
+    }
+    
+    //Preguntas hijas
+    public void insertaroModificarPregHija(String codigoNodo, int codigoPregunta, String pregunta, String respuesta){
+        NodoArbol nodo = buscarNodo(raiz, codigoNodo);
+        
+        if(nodo == null){
+            System.out.println("Nodo no encontrado");
+            return;
+        }
+        
+        if(nodo.getIzquierda() != null || nodo.getDerecha() != null){
+            System.out.println("Error: El nodo no es hoja. Solo los nodos hoja pueden tener preguntas.");
+            return;
+        }
+        
+        NodoListaArbol actual = nodo.getListaPreguntas().getPrimero();
+        boolean modificada = false;
+        
+        while(actual != null){
+            if(actual.getCodigo() == codigoPregunta){
+                actual.setPregunta(pregunta);
+                actual.setRespuesta(respuesta);
+                modificada = true;
+                break;
+            }
+            actual = actual.getSiguiente();
+        }
+        
+        if(!modificada){
+            nodo.getListaPreguntas().insertaOrdenado(codigoPregunta, pregunta, respuesta);
+            System.out.println("Pregunta insertada correctamente");
+        }else{
+            System.out.println("Pregunta modificada correcamente");
+        }
+    }
+    
+    private NodoArbol buscarNodo(NodoArbol actual, String codigo){
+        if(actual == null) return null;
+        if(actual.getCodigo().equals(codigo)) return actual;
+        
+        NodoArbol izquierda = buscarNodo(actual.getIzquierda(), codigo);
+        return buscarNodo(actual.getDerecha(), codigo);
     }
 }
