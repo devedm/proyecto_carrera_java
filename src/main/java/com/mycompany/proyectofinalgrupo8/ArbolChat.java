@@ -22,20 +22,30 @@ public class ArbolChat extends ArbolBinario{
         ListaArbol lista1111 = new ListaArbol();
         lista1111.insertaOrdenado(1, "¿Cuántos Jugadores pueden participar simultáneamente?", "Se tiene un máximo de 4 jugadores.");
         lista1111.insertaOrdenado(2, "¿Hay un tiempo máximo por partida?", "No, el juego termina cuando un jugador alcance la posición máxima.");
+        
+        ListaArbol lista1112 = new ListaArbol();
+        lista1112.insertaOrdenado(1, "¿Puedo jugar en línea?", "No, en la versión liberada no se permite jugar en línea.");
+        lista1112.insertaOrdenado(2, "¿Si hay un ganador, los demás jugadores pueden continuar?", "Si, no hay restricción que les impida continuar.");
+        
+        ListaArbol lista112 = new ListaArbol();
+        lista112.insertaOrdenado(1, "Hay una comunidad de jugadores para enriquecer el juego.", "No, pero es una excelente idea. Te invito a fundarla.");
+        lista112.insertaOrdenado(2, "En que lenguaje fue implementado", "El juego fue implementado en JAVA.");
+        lista112.insertaOrdenado(3, "¿Cuándo liberan una nueva versión?", "Esperamos liberar una nueva versión en noviembre de 2024.");
+        
         // nivel 1
         insertar("1", "Preguntas Frecuentes (FAQ)", null);
         // nivel 2
-        insertar("11", "Preguntas para jugadores", null);
-        insertar("12", "Preguntas para Administradores", null);
+        insertar("1", "Preguntas para jugadores", null);
+        insertar("1", "Preguntas para Administradores", null);
         // nivel 3
-        insertar("111", "Primera vez que juego", null);
-        insertar("112", "Jugador Experimentado", null);
-        insertar("121", "Preguntas para Administradores", null);
+        insertar("11", "Primera vez que juego", null);
+        insertar("11", "Jugador Experimentado", lista112);
+        insertar("12", "Preguntas para Administradores", null);
         // nivel 4      
-        insertar("1111", "Soy nuevo en videojuegos", lista1111);
-        insertar("1112", "Ya he jugado otros juegos similares", null);
-        insertar("1211", "Administrador preguntas", null);
-        insertar("1212", "Mejorar Juego", null);
+        insertar("111", "Soy nuevo en videojuegos", lista1111);
+        insertar("111", "Ya he jugado otros juegos similares", lista1112);
+        insertar("121", "Administrador preguntas", null);
+        insertar("121", "Mejorar Juego", null);
     }
 
     public void iniciarChatBot() {
@@ -49,7 +59,7 @@ public class ArbolChat extends ArbolBinario{
                 System.out.println("No pudimos encontrar tu pregunta en este nivel.");
                 break;
             }
-            actual.getListaPreguntas().recorrer();
+//            actual.getListaPreguntas().recorrer();
             System.out.println("\nNivel actual: " + actual.getNombre());
             if (actual.getListaPreguntas() != null) {
                 System.out.println("Preguntas disponibles:");
@@ -106,17 +116,72 @@ public class ArbolChat extends ArbolBinario{
         System.out.println("Gracias por usar el ChatBot. ¡Hasta luego!");
     }
 
-        private NodoListaArbol buscarPregunta(ListaArbol lista, int codigo) {
-            NodoListaArbol actual = lista.getPrimero();
-            while (actual != null) {
-                if (actual.getCodigo() == codigo) {
-                    return actual;
-                }else{
-                    actual = actual.getSiguiente();
-                }
+    private NodoListaArbol buscarPregunta(ListaArbol lista, int codigo) {
+        NodoListaArbol actual = lista.getPrimero();
+        while (actual != null) {
+            if (actual.getCodigo() == codigo) {
+                return actual;
+            }else{
+                actual = actual.getSiguiente();
             }
-            return null;
         }
+        return null;
+    }
+        
+    public void insertarOModificarPreguntaPadre(String codigoPadre, String nombre) {
+        if (codigoPadre == null || codigoPadre.isEmpty()) {
+            if (getRaiz() == null) {
+                insertar("1", nombre, null);
+                System.out.println("Nodo raíz insertado con código 1.");
+            } else {
+                System.out.println("Ya existe una raíz. Debe especificar un código padre para agregar más nodos.");
+            }
+            return;
+        }
+
+        NodoArbol padre = buscarNodo(getRaiz(), codigoPadre);
+        if (padre == null) {
+            System.out.println("Error: No se encontró el nodo padre con código " + codigoPadre);
+            return;
+        }
+
+        String nuevoCodigo = generarCodigoHijo(codigoPadre);
+        NodoArbol existente = buscarNodo(getRaiz(), nuevoCodigo);
+
+        if (existente != null) {
+            existente.setNombre(nombre);
+            System.out.println("Nodo existente modificado: " + nuevoCodigo);
+        } else {
+            insertar(nuevoCodigo, nombre, null); // Método heredado
+            System.out.println("Nuevo nodo insertado con código: " + nuevoCodigo);
+        }
+    }
+
+    private String generarCodigoHijo(String codigoPadre) {
+        int maxConsecutivo = obtenerMaxConsecutivo(codigoPadre);
+        return codigoPadre + (maxConsecutivo + 1);
+    }
+
+    private int obtenerMaxConsecutivo(String prefijo) {
+        return obtenerMaxRecursivo(getRaiz(), prefijo, 0);
+    }
+
+    private int obtenerMaxRecursivo(NodoArbol actual, String prefijo, int max) {
+        if (actual == null) return max;
+
+        if (actual.getCodigo().startsWith(prefijo) && actual.getCodigo().length() > prefijo.length()) {
+            try {
+                int subCodigo = Integer.parseInt(actual.getCodigo().substring(prefijo.length()));
+                max = Math.max(max, subCodigo);
+            } catch (NumberFormatException e) {
+                // Ignorar si el sufijo no es numérico
+            }
+        }
+
+        max = obtenerMaxRecursivo(actual.getIzquierda(), prefijo, max);
+        max = obtenerMaxRecursivo(actual.getDerecha(), prefijo, max);
+        return max;
+    }
 
     public static void main(String[] args) {
         ArbolChat chat = new ArbolChat();

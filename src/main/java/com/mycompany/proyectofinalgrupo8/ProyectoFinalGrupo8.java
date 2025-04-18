@@ -23,6 +23,7 @@ public class ProyectoFinalGrupo8 {
         boolean permiteAgregarJugadores = true; // Controla si se pueden agregar jugadores durante la partida
         String opcionMenu = "0"; // Opción seleccionada en el menú principal
         boolean hayGanador = false; // Indica si ya hay un ganador en la partida
+        int codigoAdministrador = 1010;
         
         // Constantes
         int MAXIMOJUGADORES = 4; // Número máximo de jugadores permitidos
@@ -36,7 +37,7 @@ public class ProyectoFinalGrupo8 {
         ColaJugadores colaJugadores = new ColaJugadores(); // Cola para gestionar el turno de los jugadores
         ListaCircular laberinto = new ListaCircular(); // Lista circular que representa el laberinto del juego
         ListaDobleC bitacora = new ListaDobleC(); // Lista doblemente enlazada para el historial de jugadores
-                
+        ArbolChat chat = new ArbolChat(); // 
         // Menu principal         
         do {            
             System.out.println("1.Jugar" +
@@ -45,7 +46,8 @@ public class ProyectoFinalGrupo8 {
                     "\n4.Bitácora-Historial" +
                     "\n5.Mantener pila" +
                     "\n6.Versión del juego" +
-                    "\n7.Salir" +
+                    "\n7.ChatBot" +
+                    "\n8.Salir" +
                     "\nSeleccione la opcion deseada: ");
             opcionMenu = scanner.next();
             switch (opcionMenu) {
@@ -195,6 +197,63 @@ public class ProyectoFinalGrupo8 {
                     Ayuda.mostrarAyuda();
                 }
                 case "7" -> {
+                    // Entrar al chatbot
+                    // codigo iniciar chatbot
+                    System.out.println("Seleccione la opcion que desea realizar:" +
+                            "\n1. Ver chatbot" +
+                            "\n2. Mantenimiento del chatbot" +
+                            "\n3. Volver al menu anterior");
+                    int opcionChatbot = scanner.nextInt();
+                    if (opcionChatbot == 1){
+                        chat.pregargarArbol();
+                        chat.iniciarChatBot();
+                        System.out.println("Gracias por usar nuestro Chatbot\nVolviendo al menu principal..");
+                    } else if (opcionChatbot == 2){
+                        // validar si es admin con codigo
+                        System.out.println("Esta funcion es solo para administradores ingrese el codigo de administrador");
+                        int codigo = scanner.nextInt();
+                        if (codigo == codigoAdministrador) {
+                            System.out.println("Codigo aceptado");
+                            System.out.println("Seleccione la opcion que desea realizar:" +
+                            "\n1. Insertar/Modificar preguntas padres" +
+                            "\n2. Insertar/Modificar preguntas hijas" +
+                            "\n3. Imprimir las preguntas" +
+                            "\n4. Volver al menu principal");
+                            
+                            int opcionChatAdmin = scanner.nextInt();
+                            
+                            if (opcionChatAdmin == 1){
+                                // Insertar/Modificar preguntas padres
+                                System.out.println("--- Insertar/Modificar preguntas padres ---");
+                                scanner.nextLine();
+
+                                System.out.print("Ingrese el código del nodo padre (o deje vacío para raíz): ");
+                                String codigoPadre = scanner.nextLine().trim();
+
+                                System.out.print("Ingrese el nombre de la nueva/modificada pregunta padre: ");
+                                String nombre = scanner.nextLine().trim();
+
+                                chat.insertarOModificarPreguntaPadre(codigoPadre, nombre);
+                            } else if (opcionChatAdmin == 2){
+                                // Insertar/Modificar preguntas hijas
+                            } else if (opcionChatAdmin == 3){
+                                // Imprimir las preguntas
+                            } else if (opcionChatAdmin == 4){
+                                System.out.println("Gracias por usar nuestro Chatbot\nVolviendo al menu principal..");
+                            } else {
+                                System.out.println("Error: codigo incorrecto volviendo al menu principal");
+                            }
+                        } else {
+                            System.out.println("Error: codigo incorrecto volviendo al menu principal");
+                        }
+                    } else if (opcionChatbot == 3){
+                        System.out.println("Volviendo al menu principal..");
+                    } else {
+                        System.out.println("No es una opcion valida...");
+                    } 
+                    
+                }
+                case "8" -> {
                     // Salir del juego
                     System.out.println("Gracias por jugar\nSaliendo..");
                     opcionMenu = "Q";
