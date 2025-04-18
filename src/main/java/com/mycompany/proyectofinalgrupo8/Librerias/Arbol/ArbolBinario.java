@@ -28,8 +28,29 @@ public class ArbolBinario {
     
     
     // Método wrapper.
-    public void insertar (String codigo, String nombre, ListaArbol listaArbol){
-        raiz = insertarRec(raiz, codigo, nombre, listaArbol );
+    public void insertar (String codigoPadre, String nombre, ListaArbol listaArbol){
+        if (raiz == null) {
+        // Si el árbol está vacío, la raíz se asigna con código "1"
+        raiz = new NodoArbol("1", nombre, listaArbol);
+        return;
+        }
+        
+        NodoArbol padre = buscarNodo(raiz, codigoPadre);
+        if (padre == null) {
+            System.out.println("Padre no encontrado");
+            return;
+        }
+
+        // Verificar si ya hay hijo izquierdo
+        if (padre.getIzquierda() == null) {
+            String nuevoCodigo = padre.getCodigo() + "1";
+            padre.setIzquierda(new NodoArbol(nuevoCodigo, nombre, listaArbol));
+        } else if (padre.getDerecha() == null) {
+            String nuevoCodigo = padre.getCodigo() + "2";
+            padre.setDerecha(new NodoArbol(nuevoCodigo, nombre, listaArbol));
+        } else {
+            System.out.println("El nodo padre ya tiene dos hijos.");
+        }
     }
     
     // Método recursivo
@@ -189,11 +210,19 @@ public class ArbolBinario {
         }
     }
     
-    private NodoArbol buscarNodo(NodoArbol actual, String codigo){
-        if(actual == null) return null;
-        if(actual.getCodigo().equals(codigo)) return actual;
-        
+    public NodoArbol buscarNodo(NodoArbol actual, String codigo){
+//        if(actual == null) return null;
+//        if(actual.getCodigo().equals(codigo)) return actual;
+//        
+//        NodoArbol izquierda = buscarNodo(actual.getIzquierda(), codigo);
+//        return buscarNodo(actual.getDerecha(), codigo);
+
+        if (actual == null) return null;
+        if (actual.getCodigo().equals(codigo)) return actual;
+
         NodoArbol izquierda = buscarNodo(actual.getIzquierda(), codigo);
+        if (izquierda != null) return izquierda;
+
         return buscarNodo(actual.getDerecha(), codigo);
     }
 }
