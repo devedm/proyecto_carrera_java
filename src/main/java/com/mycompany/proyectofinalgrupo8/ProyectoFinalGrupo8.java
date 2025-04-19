@@ -205,9 +205,8 @@ public class ProyectoFinalGrupo8 {
                             "\n3. Volver al menu anterior");
                     int opcionChatbot = scanner.nextInt();
                     if (opcionChatbot == 1){
-                        chat.pregargarArbol();
+                        chat.preCargarArbol();
                         chat.iniciarChatBot();
-                        System.out.println("Gracias por usar nuestro Chatbot\nVolviendo al menu principal..");
                     } else if (opcionChatbot == 2){
                         // validar si es admin con codigo
                         System.out.println("Esta funcion es solo para administradores ingrese el codigo de administrador");
@@ -237,7 +236,10 @@ public class ProyectoFinalGrupo8 {
                             } else if (opcionChatAdmin == 2){
                                 // Insertar/Modificar preguntas hijas
                             } else if (opcionChatAdmin == 3){
-                                // Imprimir las preguntas
+                                System.out.print("Ingrese el código del nodo para mostrar sus preguntas: ");
+                                scanner.nextLine(); // limpiar buffer
+                                String codigoNodo = scanner.nextLine();
+                                chat.listarPreguntasPorNodo(codigoNodo);
                             } else if (opcionChatAdmin == 4){
                                 System.out.println("Gracias por usar nuestro Chatbot\nVolviendo al menu principal..");
                             } else {
