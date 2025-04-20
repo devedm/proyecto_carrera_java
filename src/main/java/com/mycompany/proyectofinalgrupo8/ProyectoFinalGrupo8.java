@@ -236,6 +236,28 @@ public class ProyectoFinalGrupo8 {
                                 chat.insertarOModificarPreguntaPadre(codigoPadre, nombre);
                             } else if (opcionChatAdmin == 2){
                                 // Insertar/Modificar preguntas hijas
+                                System.out.println("--- Insertar/Modificar preguntas hijas ---");
+                                scanner.nextLine();
+                                
+                                System.out.println("Ingrese el código del nodo hoja donde desea agregar la pregunta: ");
+                                String codigoNodo = scanner.nextLine().trim();
+                                
+                                System.out.println("Ingrese el código numérico de la pregunta (entero): ");
+                                int codigoPregunta = 0;
+                                try{
+                                    codigoPregunta = Integer.parseInt(scanner.nextLine().trim());
+                                }catch(NumberFormatException e){
+                                    System.out.println("Error: El código debe de ser número entero.");
+                                    break;
+                                }
+                                
+                                System.out.println("Ingrese la pregunta: ");
+                                String pregunta = scanner.nextLine().trim();
+                                
+                                System.out.println("Ingrese la respuesta: ");
+                                String respuesta = scanner.nextLine().trim();
+                                
+                                chat.insertaroModificarPregHija(codigoNodo, codigoPregunta, pregunta, respuesta);
                             } else if (opcionChatAdmin == 3){
                                 System.out.print("Ingrese el código del nodo para mostrar sus preguntas: ");
                                 scanner.nextLine(); // limpiar buffer
