@@ -40,7 +40,7 @@ public class PilaCastigos extends PilaGenerica{
         for (int i = 0; i < numero; i++) {
             int numeroRandom = (int)(Math.random() * 10) + 1;
             this.push("-", numeroRandom, "Retrocedes " + numeroRandom + " espacios.");
-            System.out.println("Los castigos han sido generado con exito");
+            //System.out.println("Los castigos han sido generado con exito");
         }
     }
     
