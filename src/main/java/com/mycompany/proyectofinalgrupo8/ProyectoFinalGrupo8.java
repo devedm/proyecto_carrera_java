@@ -37,7 +37,8 @@ public class ProyectoFinalGrupo8 {
         ColaJugadores colaJugadores = new ColaJugadores(); // Cola para gestionar el turno de los jugadores
         ListaCircular laberinto = new ListaCircular(); // Lista circular que representa el laberinto del juego
         ListaDobleC bitacora = new ListaDobleC(); // Lista doblemente enlazada para el historial de jugadores
-        ArbolChat chat = new ArbolChat(); // 
+        ArbolChat chat = new ArbolChat(); //
+        chat.preCargarArbol();
         // Menu principal         
         do {            
             System.out.println("1.Jugar" +
@@ -205,7 +206,7 @@ public class ProyectoFinalGrupo8 {
                             "\n3. Volver al menu anterior");
                     int opcionChatbot = scanner.nextInt();
                     if (opcionChatbot == 1){
-                        chat.preCargarArbol();
+                        //chat.preCargarArbol();
                         chat.iniciarChatBot();
                     } else if (opcionChatbot == 2){
                         // validar si es admin con codigo
