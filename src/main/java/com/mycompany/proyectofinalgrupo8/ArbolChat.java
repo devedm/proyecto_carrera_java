@@ -219,13 +219,6 @@ public class ArbolChat extends ArbolBinario {
         return max;
     }
 
-    public static void main(String[] args) {
-        ArbolChat chat = new ArbolChat();
-
-        chat.preCargarArbol();
-        chat.iniciarChatBot();
-    }
-
     public void listarPreguntasPorNodo(String codigoNodo) {
         NodoArbol nodo = buscarNodo(getRaiz(), codigoNodo);
 
