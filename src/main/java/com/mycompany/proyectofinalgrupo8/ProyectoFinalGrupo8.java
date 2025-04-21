@@ -195,6 +195,7 @@ public class ProyectoFinalGrupo8 {
                 case "6" -> {
                     // Mostrar versión del juego
                     Ayuda.incrementarVersion();
+                    Ayuda.incrementarVersion();
                     Ayuda.mostrarAyuda();
                 }
                 case "7" -> {
