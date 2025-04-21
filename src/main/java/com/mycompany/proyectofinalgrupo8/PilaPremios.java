@@ -39,7 +39,7 @@ public class PilaPremios extends PilaGenerica {
         for (int i = 0; i < numero; i++) {
             int numeroRandom = (int)(Math.random() * 10) + 1;
             this.push("+", numeroRandom, "Adelantas " + numeroRandom + " espacios.");
-            System.out.println("Los premios han sido generado con exito");
+            //System.out.println("Los premios han sido generado con exito");
         }
     }
     
