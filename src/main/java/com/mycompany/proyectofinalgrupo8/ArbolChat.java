@@ -32,19 +32,29 @@ public class ArbolChat extends ArbolBinario {
         lista112.insertaOrdenado(3, "¿Cuándo liberan una nueva versión?", "Esperamos liberar una nueva versión en noviembre de 2024.");
 
         // nivel 1
-        insertar("1", "Preguntas Frecuentes (FAQ)", null);
+        NodoArbol root = new NodoArbol("1", "Preguntas frecuentes (FAQ)", null);
+        setRaiz(root);
         // nivel 2
-        insertar("1", "Preguntas para jugadores", null);
-        insertar("1", "Preguntas para Administradores", null);
+        NodoArbol node11 = new NodoArbol("1", "Preguntas para jugadores", null);
+        NodoArbol node12 = new NodoArbol("1", "Preguntas para administradores", null);
+        root.setIzquierda(node11);
+        root.setDerecha(node12);
         // nivel 3
-        insertar("11", "Primera vez que juego", null);
-        insertar("11", "Jugador Experimentado", lista112);
-        insertar("12", "Preguntas para Administradores", null);
+        NodoArbol node111 = new NodoArbol("11", "Primera vez que juego", null);
+        NodoArbol node112 = new NodoArbol("11", "Jugador experimentado", null);
+        NodoArbol node121 = new NodoArbol("12", "Preguntas para Administradores", null);
+        node11.setIzquierda(node111);
+        node11.setDerecha(node112);
+        node12.setIzquierda(node121);
         // nivel 4      
-        insertar("111", "Soy nuevo en videojuegos", lista1111);
-        insertar("111", "Ya he jugado otros juegos similares", lista1112);
-        insertar("121", "Administrador preguntas", null);
-        insertar("121", "Mejorar Juego", null);
+        NodoArbol node1111 = new NodoArbol("111", "Soy un nuevo en video juegos", lista1111);
+        NodoArbol node1112 = new NodoArbol("111", "Ya he jugado otros juegos similares", null);
+        NodoArbol node1211 = new NodoArbol("121", "Administrador preguntas", null);
+        NodoArbol node1212 = new NodoArbol("121", "Mejorar Juego", null);
+        node111.setIzquierda(node1111);
+        node111.setDerecha(node1112);
+        node121.setIzquierda(node1211);
+        node121.setDerecha(node1212);
     }
 
     public void iniciarChatBot() {
@@ -215,14 +225,6 @@ public class ArbolChat extends ArbolBinario {
         max = obtenerMaxRecursivo(actual.getDerecha(), prefijo, max);
         return max;
     }
-
-    public static void main(String[] args) {
-        ArbolChat chat = new ArbolChat();
-
-        chat.preCargarArbol();
-        chat.iniciarChatBot();
-    }
-
     public void listarPreguntasPorNodo(String codigoNodo) {
         NodoArbol nodo = buscarNodo(getRaiz(), codigoNodo);
 
