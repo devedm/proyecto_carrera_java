@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyectofinalgrupo8;
 
 import com.mycompany.proyectofinalgrupo8.Librerias.Arbol.ArbolBinario;
@@ -15,6 +11,7 @@ import java.util.Stack;
 /**
  *
  * @author minio
+ * @author William Bastos
  */
 public class ArbolChat extends ArbolBinario {
 
@@ -24,6 +21,16 @@ public class ArbolChat extends ArbolBinario {
         ListaArbol lista1111 = new ListaArbol();
         lista1111.insertaOrdenado(1, "¿Cuántos Jugadores pueden participar simultáneamente?", "Se tiene un máximo de 4 jugadores.");
         lista1111.insertaOrdenado(2, "¿Hay un tiempo máximo por partida?", "No, el juego termina cuando un jugador alcance la posición máxima.");
+
+        ListaArbol lista1112 = new ListaArbol();
+        lista1112.insertaOrdenado(1, "¿Puedo jugar en línea?", "No, en la versión liberada no se permite jugar en línea.");
+        lista1112.insertaOrdenado(2, "¿Si hay un ganador, los demás jugadores pueden continuar?", "Si, no hay restricción que les impida continuar.");
+
+        ListaArbol lista112 = new ListaArbol();
+        lista112.insertaOrdenado(1, "Hay una comunidad de jugadores para enriquecer el juego.", "No, pero es una excelente idea. Te invito a fundarla.");
+        lista112.insertaOrdenado(2, "En que lenguaje fue implementado", "El juego fue implementado en JAVA.");
+        lista112.insertaOrdenado(3, "¿Cuándo liberan una nueva versión?", "Esperamos liberar una nueva versión en noviembre de 2024.");
+
         // nivel 1
         NodoArbol root = new NodoArbol("1", "Preguntas frecuentes (FAQ)", null);
         setRaiz(root);
@@ -218,7 +225,6 @@ public class ArbolChat extends ArbolBinario {
         max = obtenerMaxRecursivo(actual.getDerecha(), prefijo, max);
         return max;
     }
-
     public void listarPreguntasPorNodo(String codigoNodo) {
         NodoArbol nodo = buscarNodo(getRaiz(), codigoNodo);
 

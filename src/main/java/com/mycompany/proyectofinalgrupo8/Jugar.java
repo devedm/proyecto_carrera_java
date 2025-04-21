@@ -206,9 +206,9 @@ public class Jugar {
         NodoDoble nodoJugador = bitacora.buscarJugador(jugador);
         if(nodoJugador != null){
             nodoJugador.getHistorial().insertaOrdenado(posicion, Castigo);
-            //System.out.println("Se ha creado entrada en la bitacora");
+        }else{
+            System.out.println("- NO se ha creado entrada en la bitacora");
         }
-        System.out.println("- NO se ha creado entrada en la bitacora");
     }
     
     /**
