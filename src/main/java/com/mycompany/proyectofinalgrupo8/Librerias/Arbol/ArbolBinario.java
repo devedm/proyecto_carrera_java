@@ -9,7 +9,8 @@ import com.mycompany.proyectofinalgrupo8.Librerias.Lista.NodoListaArbol;
 
 /**
  *
- * @author minio
+ * @author Eddy Mena Lopez
+ * @author fernandafajardo
  */
 public class ArbolBinario {
     private NodoArbol raiz;
@@ -185,6 +186,14 @@ public class ArbolBinario {
     }
 
     //Preguntas hijas
+    /**
+     * Inserta una nueva pregunta en un nodo hoja o modifica una existente si ya se encuentra registrada.
+     * Solo se permite insertar o modificar preguntas en nodos que no tengan hijos (nodos hoja).
+     * @param codigoNodo Código indentificador del nodo en el árbol deonde se desea insertar o modificar la pregunta.
+     * @param codigoPregunta Código único que identifica a la pregunta dentro del nodo.
+     * @param pregunta Texto de la pregunta que se desea registrar o actualizar.
+     * @param respuesta Respuesta asociada a la pregunta
+     */
     public void insertaroModificarPregHija(String codigoNodo, int codigoPregunta, String pregunta, String respuesta) {
         NodoArbol nodo = buscarNodo(raiz, codigoNodo);
 
@@ -218,7 +227,12 @@ public class ArbolBinario {
             System.out.println("Pregunta modificada correcamente");
         }
     }
-
+    /**
+     * Busca un nodo en el árbol a partir de su código identificador, utilizando recorrido en profundidad (preorden)
+     * @param actual Nodo desde el cual se inicia la búsqueda (puede ser la raíz o cualquier subnodo).
+     * @param codigo Código identificador del nodo que se desea encontrar.
+     * @return El nodo con el código especificado si se encuentra; de lo contrario retorna {@code null}
+     */
     public NodoArbol buscarNodo(NodoArbol actual, String codigo) {
 //        if(actual == null) return null;
 //        if(actual.getCodigo().equals(codigo)) return actual;
