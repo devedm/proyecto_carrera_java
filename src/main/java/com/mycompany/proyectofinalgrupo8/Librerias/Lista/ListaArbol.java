@@ -6,7 +6,7 @@ package com.mycompany.proyectofinalgrupo8.Librerias.Lista;
 
 /**
  *
- * @author minio
+ * @author Eddy Mena Lopez
  */
 public class ListaArbol {
      
