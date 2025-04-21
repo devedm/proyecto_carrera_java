@@ -43,6 +43,25 @@ public class PilaPremios extends PilaGenerica {
         System.out.println("Los premios han sido generado con exito");
     }
     
+    
+    /**
+     * Agrega un premio específico que permite al jugador avanzar un número determinado de espacios.
+     * Verifica que el número sea positivo antes de agregar el premio. Si el número es válido,
+     * añade el premio a la estructura correspondiente y muestra un mensaje de éxito. En caso contrario,
+     * muestra un mensaje de error.
+     * 
+     * @param numero Cantidad de espacios que el jugador avanzará (debe ser un valor positivo)
+     */
+    public void agregarPremioEspecifico(int numero) {
+        if(numero > 0){
+            this.push("+", numero, "Adelantas " + numero + " espacios.");
+            System.out.println("El premio ha sido generado con exito");
+        } else {
+            System.out.println("Error: el numero debe ser positivo, volviendo al menu anterior.");
+        }
+
+    }
+    
     /**
     * Verifica si hay premios en la pila.
     * @return true si hay al menos un premio, false si la pila está vacía.

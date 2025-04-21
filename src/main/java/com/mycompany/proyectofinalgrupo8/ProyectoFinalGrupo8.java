@@ -157,7 +157,9 @@ public class ProyectoFinalGrupo8 {
                             "\n1. Informacion de las pilas premio y castigo" +
                             "\n2. Llenar castigos" +
                             "\n3. Llenar premios" +
-                            "\n4. Llenar ambos");
+                            "\n4. Llenar ambos" +
+                            "\n5. Crear castigo" +
+                            "\n6. Crear premio");
                     int opcionPilas = scanner.nextInt();
                     if (opcionPilas == 1){
                         System.out.println("Informacion pilas: ");
@@ -187,6 +189,20 @@ public class ProyectoFinalGrupo8 {
                         System.out.println("¿Cuantos castigos desea agregar?");
                         int cantCastigos = scanner.nextInt();
                         pilaCastigos.agregarCastigosAleatorios(cantCastigos);
+                        System.out.println("Presione ENTER para continuar");
+                    } else if (opcionPilas == 5) {
+                        // Crear castigo
+                        System.out.println("Como esto es un castigo se van a restar movimientos extra.");
+                        System.out.println("¿Cual es el numero de movimientos que desea agregar al castigo?");
+                        int movimientosElegidos = scanner.nextInt();
+                        pilaCastigos.agregarCastigoEspecifico(movimientosElegidos);
+                        System.out.println("Presione ENTER para continuar");
+                    } else if (opcionPilas == 6) {
+                        // Crear premio
+                        System.out.println("Como esto es un premio se van a agregar movimientos extra.");
+                        System.out.println("¿Cual es el numero de movimientos que desea agregar al premio?");
+                        int movimientosElegidos = scanner.nextInt();
+                        pilaPremios.agregarPremioEspecifico(movimientosElegidos);
                         System.out.println("Presione ENTER para continuar");
                     } else {
                         System.out.println("No es una opcion valida...");

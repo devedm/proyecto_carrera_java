@@ -47,6 +47,24 @@ public class PilaCastigos extends PilaGenerica{
     }
     
     /**
+     * Agrega un castigo específico que permite al jugador retroceder un número determinado de espacios.
+     * Verifica que el número sea positivo antes de agregar el premio. Si el número es válido,
+     * añade el castigo a la estructura correspondiente y muestra un mensaje de éxito. En caso contrario,
+     * muestra un mensaje de error.
+     * 
+     * @param numero Cantidad de espacios que el jugador retrocedera (debe ser un valor positivo)
+     */
+    
+    public void agregarCastigoEspecifico(int numero) {
+        if(numero > 0){
+            this.push("-", numero, "Retrocedes " + numero + " espacios.");
+            System.out.println("El castigo ha sido generado con exito");
+        } else {
+            System.out.println("Error: el numero debe ser positivo, volviendo al menu anterior.");
+        }
+    }
+    
+    /**
      * Verifica si hay castigos en la pila.
      * @return true si hay castigos, false si la pila está vacía.
      */
