@@ -10,11 +10,15 @@ import java.util.Stack;
 
 /**
  *
- * @author minio
+ * @author Eddy Mena Lopez
  * @author William Bastos
  */
 public class ArbolChat extends ArbolBinario {
 
+    /**
+     * Inicializa y carga el árbol binario con preguntas frecuentes (FAQ) predeterminadas.
+     * El árbol contiene preguntas y respuestas organizadas jerárquicamente.
+     */
     public void preCargarArbol() {
         // Lista Preguntas
         // Lista Soy nuevo en videojuegos
@@ -57,6 +61,11 @@ public class ArbolChat extends ArbolBinario {
         node121.setDerecha(node1212);
     }
 
+    /**
+     * Inicia un chatbot en consola que guía al usuario a través de un árbol de preguntas frecuentes (FAQ).
+     * El usuario puede navegar por categorías jerárquicas, seleccionar preguntas y visualizar respuestas.
+     * Permite regresar a niveles anteriores o salir del sistema en cualquier momento.
+     */
     public void iniciarChatBot() {
         Scanner scanner = new Scanner(System.in);
         NodoArbol actual = getRaiz();
@@ -157,6 +166,12 @@ public class ArbolChat extends ArbolBinario {
         }
     }
 
+    /**
+     * Busca una pregunta específica dentro de una lista de preguntas según su código.
+     * @param lista Lista enlazada que contiene las preguntas (ListaArbol).
+     * @param codigo Código numérico asociado a la pregunta que se desea buscar.
+     * @return El nodo de la lista que contiene la pregunta correspondiente al código, o null si no se encuentra.
+     */
     private NodoListaArbol buscarPregunta(ListaArbol lista, int codigo) {
         NodoListaArbol actual = lista.getPrimero();
         while (actual != null) {
@@ -169,6 +184,11 @@ public class ArbolChat extends ArbolBinario {
         return null;
     }
 
+    /**
+     * Inserta un nuevo nodo hijo debajo de un nodo padre especificado, o modifica un nodo existente si ya fue insertado.
+     * @param codigoPadre Código del nodo padre al cual se desea agregar un nuevo hijo. Si es null o vacío, se intenta crear la raíz.
+     * @param nombre Nombre o descripción que tendrá el nuevo nodo o el nodo a modificar.
+     */
     public void insertarOModificarPreguntaPadre(String codigoPadre, String nombre) {
         if (codigoPadre == null || codigoPadre.isEmpty()) {
             if (getRaiz() == null) {
@@ -198,15 +218,32 @@ public class ArbolChat extends ArbolBinario {
         }
     }
 
+    /**
+     * Genera un nuevo código para un nodo hijo basado en el código del nodo padre.
+     * @param codigoPadre Código del nodo padre del cual se desea generar un nuevo hijo.
+     * @return Un nuevo código único para el nodo hijo.
+     */
     private String generarCodigoHijo(String codigoPadre) {
         int maxConsecutivo = obtenerMaxConsecutivo(codigoPadre);
         return codigoPadre + (maxConsecutivo + 1);
     }
 
+    /**
+     * Obtiene el valor numérico más alto usado como sufijo en los códigos de los nodos que inician con el prefijo dado.
+     * @param prefijo Parte inicial del código (generalmente el código del nodo padre).
+     * @return El valor numérico más alto encontrado como sufijo en los códigos hijos.
+     */
     private int obtenerMaxConsecutivo(String prefijo) {
         return obtenerMaxRecursivo(getRaiz(), prefijo, 0);
     }
 
+    /**
+     * Recorre el árbol en forma recursiva para encontrar el mayor sufijo numérico entre los nodos cuyo código comienza con el prefijo dado.
+     * @param actual Nodo actual que se está evaluando.
+     * @param prefijo Prefijo del código padre para identificar los nodos hijos.
+     * @param max Valor máximo encontrado hasta el momento.
+     * @return El sufijo numérico más alto encontrado en los nodos hijos.
+     */
     private int obtenerMaxRecursivo(NodoArbol actual, String prefijo, int max) {
         if (actual == null) {
             return max;
@@ -225,6 +262,12 @@ public class ArbolChat extends ArbolBinario {
         max = obtenerMaxRecursivo(actual.getDerecha(), prefijo, max);
         return max;
     }
+    
+    /**
+     * Lista todas las preguntas y sus respectivas respuestas registradas en un nodo hoja específico del árbol.
+     * Este método solo permite listar preguntas si el nodo indicado es una hoja (sin hijos).
+     * @param codigoNodo Código del nodo hoja del cual se desean listar las preguntas.
+     */
     public void listarPreguntasPorNodo(String codigoNodo) {
         NodoArbol nodo = buscarNodo(getRaiz(), codigoNodo);
 
